@@ -17,7 +17,11 @@ class PortalController extends Controller
         $berita = Berita::latest()->take(4)->get();
         return view('welcome', compact('berita'));
     }
-
+    public function welcome2()
+    {
+        $berita = Berita::latest()->take(4)->get();
+        return view('welcome2', compact('berita'));
+    }
     /**
      * Display the beranda page.
      */

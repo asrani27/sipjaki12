@@ -3,7 +3,7 @@
 @section('title', 'Berita - SIPJAKI')
 
 @section('content')
-<h1 class="text-3xl font-bold text-gray-800 mb-6">Berita</h1><br />
+<h1 class="text-3xl font-bold text-gray-800 mb-6">Berita</h1>
 <div class="bg-gradient-to-r from-blue-50 to-indigo-100 rounded-lg shadow-md p-8">
 
     @if($berita->count() > 0)
@@ -40,28 +40,28 @@
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if($item->gambar)
-                            <a href="{{ route('berita.show', $item->slug) }}" class="block">
-                                <img src="{{ asset('storage/berita/gambar/' . $item->gambar) }}" 
-                                     alt="{{ $item->judul }}" 
-                                     class="w-16 h-16 object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow">
-                            </a>
+                        <a href="{{ route('berita.show', $item->slug) }}" class="block">
+                            <img src="{{ asset('storage/berita/gambar/' . $item->gambar) }}" alt="{{ $item->judul }}"
+                                class="w-16 h-16 object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow">
+                        </a>
                         @else
-                            <a href="{{ route('berita.show', $item->slug) }}" class="block">
-                                <div class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
-                                    <i class="fas fa-image text-gray-400 text-xl"></i>
-                                </div>
-                            </a>
+                        <a href="{{ route('berita.show', $item->slug) }}" class="block">
+                            <div
+                                class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
+                                <i class="fas fa-image text-gray-400 text-xl"></i>
+                            </div>
+                        </a>
                         @endif
                     </td>
                     <td class="px-6 py-4">
-                        <a href="{{ route('berita.show', $item->slug) }}" 
-                           class="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors line-clamp-2">
+                        <a href="{{ route('berita.show', $item->slug) }}"
+                            class="text-sm font-medium text-gray-900 hover:text-blue-600 transition-colors line-clamp-2">
                             {{ $item->judul }}
                         </a>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">
                         <i class="far fa-calendar-alt mr-1"></i>
-                        {{ $item->created_at->format('d/m/Y') }}
+                        {{ $item->created_at ? $item->created_at->format('d/m/Y') : 'N/A' }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-600">
                         <p class="line-clamp-2">
@@ -69,8 +69,8 @@
                         </p>
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm">
-                        <a href="{{ route('berita.show', $item->slug) }}" 
-                           class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-md transition-colors">
+                        <a href="{{ route('berita.show', $item->slug) }}"
+                            class="inline-flex items-center px-3 py-1.5 bg-blue-600 hover:bg-blue-700 text-white text-xs font-medium rounded-md transition-colors">
                             <i class="fas fa-eye mr-1"></i>
                             Baca
                         </a>

@@ -9,6 +9,7 @@ use App\Http\Controllers\SuperadminController;
 use App\Http\Controllers\BeritaController;
 
 Route::get('/', [PortalController::class, 'welcome']);
+Route::get('/welcome2', [PortalController::class, 'welcome2']);
 
 // Portal Routes (public access)
 Route::controller(PortalController::class)->group(function () {
@@ -79,10 +80,10 @@ Route::middleware(['auth'])->group(function () {
         Route::resource('berita', BeritaController::class)->parameters([
             'berita' => 'berita'
         ]);
-        
+
         // Agenda Routes
         Route::resource('agenda', AgendaController::class);
-        
+
         // Slideshow Routes
         Route::resource('slideshow', SlideController::class)->parameters([
             'slideshow' => 'slide'
