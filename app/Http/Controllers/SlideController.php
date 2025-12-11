@@ -59,7 +59,6 @@ class SlideController extends Controller
      */
     public function destroy(Slide $slide)
     {
-        dd($slide->file);
         // Delete the file from storage if it exists
         if ($slide->file && Storage::disk('public')->exists($slide->file)) {
             Storage::disk('public')->delete($slide->file);

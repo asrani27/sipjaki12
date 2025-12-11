@@ -3,10 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Profil;
+use App\Models\Berita;
 use Illuminate\Http\Request;
 
 class PortalController extends Controller
 {
+    /**
+     * Display the welcome page with berita data.
+     */
+    public function welcome()
+    {
+        $berita = Berita::latest()->take(4)->get();
+        return view('welcome', compact('berita'));
+    }
+
     /**
      * Display the beranda page.
      */

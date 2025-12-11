@@ -1,6 +1,6 @@
 @extends('portal.app')
 
-@section('title', 'Portal Informasi PUPR')
+@section('title', 'Portal Informasi SIPJAKI')
 
 @section('content')
     <!-- 2 Grid: Slideshow Kiri dan Card Kanan -->
@@ -11,40 +11,73 @@
                 <div class="relative h-96">
                     <!-- Slideshow Images -->
                     <div id="slideshow" class="relative h-full">
-                        <div class="slide absolute inset-0 transition-opacity duration-500">
-                            <img src="https://picsum.photos/seed/slide1/800/400.jpg" alt="Slide 1"
-                                class="w-full h-full object-cover">
-                            <div
-                                class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                                <h3 class="text-white text-2xl font-bold mb-2">Berita Utama 1</h3>
-                                <p class="text-white/90">Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                                </p>
+                        @php
+                            $slides = \App\Models\Slide::latest()->get();
+                            if($slides->isEmpty()) {
+                                // Fallback to default slides if no slides in database
+                                $slides = collect([
+                                    (object) [
+                                        'file' => null,
+                                        'default_image' => 'https://picsum.photos/seed/slide1/800/400.jpg',
+                                        'title' => 'Berita Utama 1',
+                                        'description' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
+                                    ],
+                                    (object) [
+                                        'file' => null,
+                                        'default_image' => 'https://picsum.photos/seed/slide2/800/400.jpg',
+                                        'title' => 'Berita Utama 2',
+                                        'description' => 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
+                                    ],
+                                    (object) [
+                                        'file' => null,
+                                        'default_image' => 'https://picsum.photos/seed/slide3/800/400.jpg',
+                                        'title' => 'Berita Utama 3',
+                                        'description' => 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.'
+                                    ]
+                                ]);
+                            }
+                        @endphp
+                        
+                        @foreach($slides as $index => $slide)
+                            <div class="slide absolute inset-0 transition-opacity duration-500 {{ $index == 0 ? '' : 'opacity-0' }}" data-slide="{{ $index }}">
+                                <img src="{{ $slide->file ? asset('storage/' . $slide->file) : ($slide->default_image ?? 'https://picsum.photos/seed/slide' . ($index + 1) . '/800/400.jpg') }}" 
+                                     alt="Slide {{ $index + 1 }}" class="w-full h-full object-cover">
+                                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
+                                    <h3 class="text-white text-2xl font-bold mb-2">
+                                        {{ $slide->title ?? ('Slide ' . ($index + 1)) }}
+                                    </h3>
+                                    <p class="text-white/90">
+                                        {{ $slide->description ?? 'Selamat datang di Portal Informasi SIPJAKI' }}
+                                    </p>
+                                </div>
                             </div>
-                        </div>
+                        @endforeach
                     </div>
 
                     <!-- Slideshow Controls -->
-                    <button onclick="previousSlide()"
-                        class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M15 19l-7-7 7-7" />
-                        </svg>
-                    </button>
-                    <button onclick="nextSlide()"
-                        class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition">
-                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M9 5l7 7-7 7" />
-                        </svg>
-                    </button>
+                    @if($slides->count() > 1)
+                        <button onclick="previousSlide()"
+                            class="absolute left-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M15 19l-7-7 7-7" />
+                            </svg>
+                        </button>
+                        <button onclick="nextSlide()"
+                            class="absolute right-4 top-1/2 -translate-y-1/2 bg-white/80 hover:bg-white text-gray-800 p-2 rounded-full shadow-lg transition">
+                            <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                    d="M9 5l7 7-7 7" />
+                            </svg>
+                        </button>
 
-                    <!-- Slide Indicators -->
-                    <div class="absolute bottom-4 right-4 flex space-x-2">
-                        <span class="w-2 h-2 bg-white rounded-full opacity-100"></span>
-                        <span class="w-2 h-2 bg-white/50 rounded-full"></span>
-                        <span class="w-2 h-2 bg-white/50 rounded-full"></span>
-                    </div>
+                        <!-- Slide Indicators -->
+                        <div class="absolute bottom-4 right-4 flex space-x-2">
+                            @foreach($slides as $index => $slide)
+                                <span class="slide-indicator w-2 h-2 bg-white rounded-full {{ $index == 0 ? 'opacity-100' : 'opacity-50' }}" data-slide="{{ $index }}"></span>
+                            @endforeach
+                        </div>
+                    @endif
                 </div>
             </div>
         </div>
@@ -97,126 +130,166 @@
         </div>
     </div>
 
-    <!-- Card Informasi Tambahan -->
+    <!-- Card Berita Terbaru -->
     <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-            <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
-                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" />
-                </svg>
+        @if($berita->count() > 0)
+            @foreach($berita as $item)
+                <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                    <div class="h-48 overflow-hidden">
+                        @if($item->gambar)
+                            <img src="{{ asset('storage/berita/gambar/' . $item->gambar) }}" 
+                                 alt="{{ $item->judul }}" 
+                                 class="w-full h-full object-cover">
+                        @else
+                            <div class="w-full h-full bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
+                                    <path fill-rule="evenodd"
+                                        d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 00-2 2v6a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-1a1 1 0 100-2h1a4 4 0 014 4v6a4 4 0 01-4 4H6a4 4 0 01-4-4V7a4 4 0 014-4z"
+                                        clip-rule="evenodd" />
+                                </svg>
+                            </div>
+                        @endif
+                    </div>
+                    <div class="p-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-2 line-clamp-2">{{ Str::limit($item->judul, 50) }}</h3>
+                        <p class="text-gray-500 text-sm mb-4">
+                            <svg class="w-3 h-3 inline mr-1" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd"
+                                    d="M6 2a1 1 0 00-1 1v1H4a2 2 0 00-2 2v10a2 2 0 002 2h12a2 2 0 002-2V6a2 2 0 00-2-2h-1V3a1 1 0 10-2 0v1H7V3a1 1 0 00-1-1zm0 5a1 1 0 000 2h8a1 1 0 100-2H6z"
+                                    clip-rule="evenodd" />
+                            </svg>
+                            {{ $item->created_at->format('d M Y') }}
+                        </p>
+                        <a href="{{ route('berita.show', $item->slug) }}" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
+                    </div>
+                </div>
+            @endforeach
+        @else
+            <!-- Fallback cards when no berita available -->
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                <div class="h-48 bg-gradient-to-br from-blue-400 to-blue-600 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3z" />
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Pendidikan</h3>
+                    <p class="text-gray-600 text-sm mb-4">Program studi unggulan dengan kurikulum terkini dan metode
+                        pembelajaran modern.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
+                </div>
             </div>
-            <div class="p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Pendidikan</h3>
-                <p class="text-gray-600 text-sm mb-4">Program studi unggulan dengan kurikulum terkini dan metode
-                    pembelajaran modern.</p>
-                <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
-            </div>
-        </div>
 
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-            <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
-                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-                        d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
-                        clip-rule="evenodd" />
-                    <path
-                        d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
-                </svg>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                <div class="h-48 bg-gradient-to-br from-green-400 to-green-600 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                            clip-rule="evenodd" />
+                        <path
+                            d="M2 13.692V16a2 2 0 002 2h12a2 2 0 002-2v-2.308A24.974 24.974 0 0110 15c-2.796 0-5.487-.46-8-1.308z" />
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Penelitian</h3>
+                    <p class="text-gray-600 text-sm mb-4">Pusat penelitian dan pengembangan dengan berbagai publikasi
+                        ilmiah berkualitas.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
+                </div>
             </div>
-            <div class="p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Penelitian</h3>
-                <p class="text-gray-600 text-sm mb-4">Pusat penelitian dan pengembangan dengan berbagai publikasi
-                    ilmiah berkualitas.</p>
-                <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
-            </div>
-        </div>
 
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-            <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
-                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd"
-                        d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
-                        clip-rule="evenodd" />
-                </svg>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                <div class="h-48 bg-gradient-to-br from-purple-400 to-purple-600 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M12.316 3.051a1 1 0 01.633 1.265l-4 12a1 1 0 11-1.898-.632l4-12a1 1 0 011.265-.633zM5.707 6.293a1 1 0 010 1.414L3.414 10l2.293 2.293a1 1 0 11-1.414 1.414l-3-3a1 1 0 010-1.414l3-3a1 1 0 011.414 0zm8.586 0a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 11-1.414-1.414L16.586 10l-2.293-2.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Teknologi</h3>
+                    <p class="text-gray-600 text-sm mb-4">Fasilitas teknologi modern untuk mendukung kegiatan akademik
+                        dan penelitian.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
+                </div>
             </div>
-            <div class="p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Teknologi</h3>
-                <p class="text-gray-600 text-sm mb-4">Fasilitas teknologi modern untuk mendukung kegiatan akademik
-                    dan penelitian.</p>
-                <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
-            </div>
-        </div>
 
-        <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
-            <div class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
-                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
-                    <path
-                        d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
-                </svg>
+            <div class="bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-xl transition">
+                <div class="h-48 bg-gradient-to-br from-orange-400 to-orange-600 flex items-center justify-center">
+                    <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
+                        <path
+                            d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
+                    </svg>
+                </div>
+                <div class="p-6">
+                    <h3 class="text-lg font-semibold text-gray-800 mb-2">Kemahasiswaan</h3>
+                    <p class="text-gray-600 text-sm mb-4">Berbagai kegiatan ekstrakurikuler dan organisasi mahasiswa
+                        untuk pengembangan diri.</p>
+                    <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
+                </div>
             </div>
-            <div class="p-6">
-                <h3 class="text-lg font-semibold text-gray-800 mb-2">Kemahasiswaan</h3>
-                <p class="text-gray-600 text-sm mb-4">Berbagai kegiatan ekstrakurikuler dan organisasi mahasiswa
-                    untuk pengembangan diri.</p>
-                <a href="#" class="text-blue-600 hover:text-blue-700 font-medium text-sm">Selengkapnya →</a>
-            </div>
-        </div>
+        @endif
     </div>
 @endsection
 
 @section('scripts')
 <script>
     let currentSlide = 0;
-    const slides = [
-        {
-            image: 'https://picsum.photos/seed/slide1/800/400.jpg',
-            title: 'Berita Utama 1',
-            description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit.'
-        },
-        {
-            image: 'https://picsum.photos/seed/slide2/800/400.jpg',
-            title: 'Berita Utama 2',
-            description: 'Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.'
-        },
-        {
-            image: 'https://picsum.photos/seed/slide3/800/400.jpg',
-            title: 'Berita Utama 3',
-            description: 'Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris.'
-        }
-    ];
+    
+    // Get slide data from PHP
+    const slides = @json($slides);
+    const totalSlides = slides.length;
 
     function showSlide(index) {
-        const slideshow = document.getElementById('slideshow');
-        const indicators = document.querySelectorAll('.absolute.bottom-4.right-4 span');
+        const allSlides = document.querySelectorAll('.slide');
+        const indicators = document.querySelectorAll('.slide-indicator');
         
-        slideshow.innerHTML = `
-            <div class="slide absolute inset-0 transition-opacity duration-500">
-                <img src="${slides[index].image}" alt="Slide ${index + 1}" class="w-full h-full object-cover">
-                <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/70 to-transparent p-6">
-                    <h3 class="text-white text-2xl font-bold mb-2">${slides[index].title}</h3>
-                    <p class="text-white/90">${slides[index].description}</p>
-                </div>
-            </div>
-        `;
-        
-        indicators.forEach(function(indicator, i) {
-            indicator.className = i === index ? 'w-2 h-2 bg-white rounded-full opacity-100' : 'w-2 h-2 bg-white/50 rounded-full';
+        // Hide all slides
+        allSlides.forEach(function(slide) {
+            slide.classList.add('opacity-0');
+            slide.classList.remove('opacity-100');
         });
+        
+        // Show current slide
+        if (allSlides[index]) {
+            allSlides[index].classList.remove('opacity-0');
+            allSlides[index].classList.add('opacity-100');
+        }
+        
+        // Update indicators
+        indicators.forEach(function(indicator, i) {
+            if (i === index) {
+                indicator.classList.remove('opacity-50');
+                indicator.classList.add('opacity-100');
+            } else {
+                indicator.classList.remove('opacity-100');
+                indicator.classList.add('opacity-50');
+            }
+        });
+        
+        currentSlide = index;
     }
 
     function nextSlide() {
-        currentSlide = (currentSlide + 1) % slides.length;
-        showSlide(currentSlide);
+        if (totalSlides > 1) {
+            currentSlide = (currentSlide + 1) % totalSlides;
+            showSlide(currentSlide);
+        }
     }
 
     function previousSlide() {
-        currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-        showSlide(currentSlide);
+        if (totalSlides > 1) {
+            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+            showSlide(currentSlide);
+        }
     }
 
-    // Auto-advance slideshow
-    setInterval(nextSlide, 5000);
+    // Auto-advance slideshow only if there are multiple slides
+    if (totalSlides > 1) {
+        setInterval(nextSlide, 5000);
+    }
 
     // Mobile Menu Toggle
     function toggleMobileMenu(event) {

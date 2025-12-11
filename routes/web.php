@@ -8,9 +8,7 @@ use App\Http\Controllers\PortalController;
 use App\Http\Controllers\SuperadminController;
 use App\Http\Controllers\BeritaController;
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::get('/', [PortalController::class, 'welcome']);
 
 // Portal Routes (public access)
 Route::controller(PortalController::class)->group(function () {
@@ -39,6 +37,9 @@ Route::controller(PortalController::class)->group(function () {
     Route::get('/potensi-pasar', 'potensiPasar')->name('potensi-pasar');
     Route::get('/peraturan', 'peraturan')->name('peraturan');
 });
+
+// Berita Detail Route (public access)
+Route::get('/berita/{slug}', [BeritaController::class, 'show'])->name('berita.show');
 
 // Login Routes
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
@@ -75,12 +76,16 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/upload-image', [SuperadminController::class, 'uploadImage'])->name('upload.image');
 
         // Berita Routes
-        Route::resource('berita', BeritaController::class);
+        Route::resource('berita', BeritaController::class)->parameters([
+            'berita' => 'berita'
+        ]);
         
         // Agenda Routes
         Route::resource('agenda', AgendaController::class);
         
         // Slideshow Routes
-        Route::resource('slideshow', SlideController::class);
+        Route::resource('slideshow', SlideController::class)->parameters([
+            'slideshow' => 'slide'
+        ]);
     });
 });

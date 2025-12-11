@@ -97,6 +97,15 @@ class BeritaController extends Controller
     }
 
     /**
+     * Display the specified resource.
+     */
+    public function show($slug)
+    {
+        $berita = Berita::where('slug', $slug)->firstOrFail();
+        return view('portal.berita-detail', compact('berita'));
+    }
+
+    /**
      * Remove the specified resource from storage.
      */
     public function destroy(Berita $berita)
