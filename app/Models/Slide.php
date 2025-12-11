@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Slide extends Model
 {
-    protected $table = 'slide';
+    protected $table = 'slides';
 
     /**
      * The attributes that are mass assignable.
@@ -14,5 +14,5 @@ class Slide extends Model
      * @var array
      */
     protected $guarded = ['id'];
-    public $timestamps = false;
+    public $timestamps = true;
 }

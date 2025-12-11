@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
 use App\Http\Controllers\PortalController;
@@ -74,13 +75,12 @@ Route::middleware(['auth'])->group(function () {
         Route::post('/upload-image', [SuperadminController::class, 'uploadImage'])->name('upload.image');
 
         // Berita Routes
-        Route::resource('berita', BeritaController::class)->parameters([
-            'berita' => 'berita'
-        ]);
+        Route::resource('berita', BeritaController::class);
         
         // Agenda Routes
-        Route::resource('agenda', AgendaController::class)->parameters([
-            'agenda' => 'agenda'
-        ]);
+        Route::resource('agenda', AgendaController::class);
+        
+        // Slideshow Routes
+        Route::resource('slideshow', SlideController::class);
     });
 });
