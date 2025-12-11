@@ -177,53 +177,73 @@
             transform: scale(1.1);
         }
 
-        .mobile-menu-toggle {
+        /* Simple Mobile Menu Styles */
+        .mobile-menu-btn {
             display: none;
+            /* Sembunyikan di desktop */
+            align-items: center;
+            justify-content: center;
             background: white;
             border: none;
-            transition: all 0.3s ease;
-            border-radius: 0.5rem;
-            padding: 0.75rem;
+            padding: 12px;
+            border-radius: 8px;
             cursor: pointer;
-            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-            z-index: 60;
-            position: relative;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
         }
 
-        .mobile-menu-toggle:hover {
-            background: #f3f4f6;
+        .mobile-menu-btn:hover {
+            background: #f8f9fa;
             transform: scale(1.05);
         }
 
-        .mobile-menu-toggle svg {
-            color: #374151;
-            stroke: currentColor;
+        .mobile-menu-btn svg {
+            width: 24px;
+            height: 24px;
         }
 
-        @media (max-width: 1024px) {
-            .mobile-menu-toggle {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 9998;
+        }
 
+        .mobile-overlay.active {
+            display: block;
+        }
+
+        /* --- PERBAIKAN CSS MOBILE --- */
+        /* Tampilkan tombol menu hanya di mobile */
+        @media (max-width: 1023px) {
+            .mobile-menu-btn {
+                display: flex !important;
+            }
+        }
+
+        /* Gaya untuk menu navigasi di layar mobile */
+        @media (max-width: 1024px) {
             .nav-menu {
                 position: fixed;
                 top: 0;
                 left: -100%;
+                /* Posisikan di luar layar */
                 width: 80%;
                 max-width: 320px;
                 height: 100vh;
                 background: linear-gradient(135deg, rgb(51, 95, 185) 0%, rgb(242, 143, 7) 100%);
-                transition: transform 0.3s ease;
-                z-index: 999;
+                transition: left 0.3s ease;
+                z-index: 9999;
                 overflow-y: auto;
                 box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
-                transform: translateX(-100%);
             }
 
+            /* Tampilkan menu saat kelas 'active' ditambahkan */
             .nav-menu.active {
-                transform: translateX(0);
                 left: 0;
             }
 
@@ -267,6 +287,7 @@
                 color: #ffffff !important;
             }
 
+            /* Gaya dropdown di mobile */
             .dropdown-menu {
                 position: static;
                 opacity: 1;
@@ -283,6 +304,7 @@
                 transition: max-height 0.3s ease;
             }
 
+            /* Kelas untuk membuka dropdown di mobile */
             .dropdown-menu.mobile-open {
                 max-height: 500px;
             }
@@ -345,29 +367,20 @@
         </div>
     </header>
 
-    <!-- Mobile Header Bar - Fixed Position -->
-    {{-- <div class="mobile-header-bar lg:hidden fixed top-4 left-4 z-[60] flex items-center">
-        <!-- Mobile Menu Toggle -->
-        <button
-            class="mobile-menu-toggle-header p-4 rounded-lg bg-white shadow-lg hover:bg-gray-100 transition relative z-[60]">
-            <svg class="w-6 h-6 text-gray-700 pointer-events-none" fill="none" stroke="currentColor"
-                viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />
+    <!-- Mobile Menu Toggle -->
+    <div class="lg:hidden fixed top-24 left-4 z-50">
+        <button class="mobile-menu-btn" id="mobileMenuBtn">
+            <svg fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16">
+                </path>
             </svg>
         </button>
-    </div> --}}
+    </div>
 
     <!-- Navigation Menu -->
     <nav class="nav-menu shadow-lg sticky top-0 z-40">
         <div class="container mx-auto px-4">
             <div class="flex items-center justify-between">
-                <!-- Mobile Menu Toggle -->
-                <button class="mobile-menu-toggle lg:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors">
-                    <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"></path>
-                    </svg>
-                </button>
-
                 <!-- Desktop Menu -->
                 <ul class="nav-list hidden lg:flex items-center space-x-0">
                     <li class="nav-item">
@@ -456,7 +469,8 @@
                             <a href="{{ route('agenda') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
                                     <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                                        <path d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
+                                        <path
+                                            d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                                     </svg>
                                     <span>Agenda</span>
                                 </div>
@@ -664,309 +678,118 @@
                 </ul>
             </div>
         </div>
-
-        <!-- Mobile Menu Overlay -->
-        <div class="mobile-menu-overlay fixed inset-0 bg-black bg-opacity-50 z-40 lg:hidden hidden">
-            <!-- Mobile Menu Sidebar -->
-            <div class="mobile-menu-sidebar fixed left-0 top-0 h-full w-80 bg-white shadow-xl transform -translate-x-full transition-transform duration-300">
-                <div class="p-4 border-b">
-                    <div class="flex items-center justify-between">
-                        <h2 class="text-lg font-semibold text-gray-800">Menu</h2>
-                        <button class="mobile-menu-close p-2 rounded-lg hover:bg-gray-100">
-                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path>
-                            </svg>
-                        </button>
-                    </div>
-                </div>
-                <!-- Mobile Menu Items -->
-                <ul class="mobile-nav-list">
-                    <li class="mobile-nav-item">
-                        <a href="/" class="mobile-nav-link px-4 py-3 block hover:bg-gray-50">
-                            <span class="flex items-center space-x-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6" />
-                                </svg>
-                                <span>Beranda</span>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <button class="mobile-dropdown-toggle mobile-nav-link px-4 py-3 block w-full text-left hover:bg-gray-50">
-                            <span class="flex items-center justify-between">
-                                <span class="flex items-center space-x-3">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                                    </svg>
-                                    <span>Profil</span>
-                                </span>
-                                <svg class="w-4 h-4 dropdown-arrow transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="mobile-dropdown-menu hidden">
-                            <a href="{{ route('struktur-organisasi') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Struktur Organisasi</a>
-                            <a href="{{ route('renstra') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Renstra</a>
-                            <a href="{{ route('tupoksi') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Tupoksi</a>
-                        </div>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <button class="mobile-dropdown-toggle mobile-nav-link px-4 py-3 block w-full text-left hover:bg-gray-50">
-                            <span class="flex items-center justify-between">
-                                <span class="flex items-center space-x-3">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                                    </svg>
-                                    <span>Informasi</span>
-                                </span>
-                                <svg class="w-4 h-4 dropdown-arrow transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="mobile-dropdown-menu hidden">
-                            <a href="{{ route('berita') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Berita</a>
-                            <a href="{{ route('agenda') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Agenda</a>
-                        </div>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <button class="mobile-dropdown-toggle mobile-nav-link px-4 py-3 block w-full text-left hover:bg-gray-50">
-                            <span class="flex items-center justify-between">
-                                <span class="flex items-center space-x-3">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                                    </svg>
-                                    <span>Pelatihan</span>
-                                </span>
-                                <svg class="w-4 h-4 dropdown-arrow transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="mobile-dropdown-menu hidden">
-                            <a href="{{ route('sertifikasi') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Sertifikasi</a>
-                            <a href="{{ route('bimtek') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Bimtek</a>
-                        </div>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <button class="mobile-dropdown-toggle mobile-nav-link px-4 py-3 block w-full text-left hover:bg-gray-50">
-                            <span class="flex items-center justify-between">
-                                <span class="flex items-center space-x-3">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
-                                    </svg>
-                                    <span>Pengawasan</span>
-                                </span>
-                                <svg class="w-4 h-4 dropdown-arrow transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="mobile-dropdown-menu hidden">
-                            <a href="{{ route('tertib-usaha') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Tertib Usaha</a>
-                            <a href="{{ route('tertib-penyelenggara') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Tertib Penyelenggara</a>
-                            <a href="{{ route('tertib-pemanfaatan') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Tertib Pemanfaatan</a>
-                        </div>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <button class="mobile-dropdown-toggle mobile-nav-link px-4 py-3 block w-full text-left hover:bg-gray-50">
-                            <span class="flex items-center justify-between">
-                                <span class="flex items-center space-x-3">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                    </svg>
-                                    <span>Jakon</span>
-                                </span>
-                                <svg class="w-4 h-4 dropdown-arrow transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="mobile-dropdown-menu hidden">
-                            <a href="{{ route('ska-skt') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">SKA/SKT</a>
-                            <a href="{{ route('penanggung-jawab-teknik') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Penanggung Jawab Teknik</a>
-                        </div>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <button class="mobile-dropdown-toggle mobile-nav-link px-4 py-3 block w-full text-left hover:bg-gray-50">
-                            <span class="flex items-center justify-between">
-                                <span class="flex items-center space-x-3">
-                                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                            d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
-                                    </svg>
-                                    <span>SPM</span>
-                                </span>
-                                <svg class="w-4 h-4 dropdown-arrow transform transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                                </svg>
-                            </span>
-                        </button>
-                        <div class="mobile-dropdown-menu hidden">
-                            <a href="{{ route('spm-informasi') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Informasi</a>
-                            <a href="{{ route('spm-laporan') }}" class="mobile-dropdown-item px-12 py-2 block hover:bg-gray-50">Laporan</a>
-                        </div>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <a href="{{ route('tim-pembina') }}" class="mobile-nav-link px-4 py-3 block hover:bg-gray-50">
-                            <span class="flex items-center space-x-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
-                                </svg>
-                                <span>Tim Pembina</span>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <a href="{{ route('potensi-pasar') }}" class="mobile-nav-link px-4 py-3 block hover:bg-gray-50">
-                            <span class="flex items-center space-x-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
-                                </svg>
-                                <span>Potensi Pasar</span>
-                            </span>
-                        </a>
-                    </li>
-                    <li class="mobile-nav-item">
-                        <a href="{{ route('peraturan') }}" class="mobile-nav-link px-4 py-3 block hover:bg-gray-50">
-                            <span class="flex items-center space-x-3">
-                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                        d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
-                                </svg>
-                                <span>Peraturan</span>
-                            </span>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
     </nav>
 
-    <!-- JavaScript for Mobile Menu -->
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay"></div>
+
+    <!-- --- PERBAIKAN JAVASCRIPT --- -->
     <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        // Handle all toggle buttons with event delegation
-        const mobileMenuToggles = document.querySelectorAll('.mobile-menu-toggle');
-        const mobileMenuOverlay = document.querySelector('.mobile-menu-overlay');
-        const mobileMenuSidebar = document.querySelector('.mobile-menu-sidebar');
-        const mobileMenuClose = document.querySelector('.mobile-menu-close');
-        const mobileDropdownToggles = document.querySelectorAll('.mobile-dropdown-toggle');
+        document.addEventListener('DOMContentLoaded', function() {
+        const mobileMenuBtn = document.getElementById('mobileMenuBtn');
+        const navMenu = document.querySelector('.nav-menu'); // Target .nav-menu, bukan #mobileSidebar
+        const mobileOverlay = document.getElementById('mobileOverlay');
+        const mobileDropdownBtns = document.querySelectorAll('.nav-item > button.nav-link'); // Target tombol dropdown di .nav-item
 
-        // Debug: Log elements to verify they exist
-        console.log('Mobile menu elements:', {
-            toggles: mobileMenuToggles.length,
-            overlay: !!mobileMenuOverlay,
-            sidebar: !!mobileMenuSidebar,
-            closeBtn: !!mobileMenuClose,
-            dropdowns: mobileDropdownToggles.length
+        console.log('Mobile menu elements found:', {
+            menuBtn: !!mobileMenuBtn,
+            navMenu: !!navMenu,
+            overlay: !!mobileOverlay,
+            dropdowns: mobileDropdownBtns.length
         });
 
-        // Toggle mobile menu
-        mobileMenuToggles.forEach(toggle => {
-            toggle.addEventListener('click', function(e) {
-                e.preventDefault();
-                console.log('Mobile menu toggle clicked');
-                
-                if (mobileMenuOverlay) {
-                    mobileMenuOverlay.classList.remove('hidden');
-                    console.log('Overlay shown');
-                }
-                
-                if (mobileMenuSidebar) {
-                    setTimeout(() => {
-                        mobileMenuSidebar.classList.remove('-translate-x-full');
-                        console.log('Sidebar shown');
-                    }, 10);
-                }
-            });
-        });
+        // Open mobile menu
+        function openMobileMenu() {
+            console.log('Opening mobile menu');
+            if (mobileOverlay) {
+                mobileOverlay.style.display = 'block';
+                setTimeout(() => {
+                    mobileOverlay.classList.add('active');
+                }, 10);
+            }
+            if (navMenu) {
+                navMenu.classList.add('active');
+            }
+        }
 
         // Close mobile menu
         function closeMobileMenu() {
             console.log('Closing mobile menu');
-            if (mobileMenuSidebar) {
-                mobileMenuSidebar.classList.add('-translate-x-full');
+            if (navMenu) {
+                navMenu.classList.remove('active');
             }
-            setTimeout(() => {
-                if (mobileMenuOverlay) {
-                    mobileMenuOverlay.classList.add('hidden');
-                }
-            }, 300);
+            if (mobileOverlay) {
+                mobileOverlay.classList.remove('active');
+                setTimeout(() => {
+                    mobileOverlay.style.display = 'none';
+                }, 300);
+            }
         }
 
-        if (mobileMenuClose) {
-            mobileMenuClose.addEventListener('click', function(e) {
+        // Toggle menu button click
+        if (mobileMenuBtn) {
+            mobileMenuBtn.addEventListener('click', function(e) {
                 e.preventDefault();
+                e.stopPropagation();
+                console.log('Menu button clicked');
+                
+                const isOpen = navMenu && navMenu.classList.contains('active');
+                
+                if (isOpen) {
+                    closeMobileMenu();
+                } else {
+                    openMobileMenu();
+                }
+            });
+        }
+
+        // Overlay click to close
+        if (mobileOverlay) {
+            mobileOverlay.addEventListener('click', function(e) {
+                e.preventDefault();
+                console.log('Overlay clicked');
                 closeMobileMenu();
             });
         }
-        
-        if (mobileMenuOverlay) {
-            mobileMenuOverlay.addEventListener('click', function(e) {
-                if (e.target === mobileMenuOverlay) {
-                    closeMobileMenu();
-                }
-            });
-        }
 
-        // Toggle mobile dropdowns
-        mobileDropdownToggles.forEach(toggle => {
-            toggle.addEventListener('click', function(e) {
+        // Mobile dropdown toggles
+        mobileDropdownBtns.forEach(btn => {
+            btn.addEventListener('click', function(e) {
                 e.preventDefault();
                 e.stopPropagation();
                 
+                console.log('Dropdown button clicked');
+                
                 const dropdownMenu = this.nextElementSibling;
-                const arrow = this.querySelector('.dropdown-arrow');
                 
                 if (!dropdownMenu) return;
                 
-                const isOpen = !dropdownMenu.classList.contains('hidden');
-                console.log('Dropdown toggle clicked, isOpen:', isOpen);
-                
                 // Close all other dropdowns
-                mobileDropdownToggles.forEach(otherToggle => {
-                    if (otherToggle !== toggle) {
-                        const otherMenu = otherToggle.nextElementSibling;
-                        const otherArrow = otherToggle.querySelector('.dropdown-arrow');
+                mobileDropdownBtns.forEach(otherBtn => {
+                    if (otherBtn !== btn) {
+                        const otherMenu = otherBtn.nextElementSibling;
                         if (otherMenu) {
-                            otherMenu.classList.add('hidden');
-                        }
-                        if (otherArrow) {
-                            otherArrow.classList.remove('rotate-180');
+                            otherMenu.classList.remove('mobile-open'); // Gunakan kelas yang sesuai dengan CSS
                         }
                     }
                 });
                 
                 // Toggle current dropdown
-                if (isOpen) {
-                    dropdownMenu.classList.add('hidden');
-                    if (arrow) {
-                        arrow.classList.remove('rotate-180');
-                    }
-                } else {
-                    dropdownMenu.classList.remove('hidden');
-                    if (arrow) {
-                        arrow.classList.add('rotate-180');
-                    }
-                }
+                dropdownMenu.classList.toggle('mobile-open'); // Gunakan kelas yang sesuai dengan CSS
             });
         });
 
-        // Handle escape key to close menu
+        // Prevent sidebar clicks from closing menu
+        if (navMenu) {
+            navMenu.addEventListener('click', function(e) {
+                e.stopPropagation();
+            });
+        }
+
+        // Escape key to close menu
         document.addEventListener('keydown', function(e) {
-            if (e.key === 'Escape' && mobileMenuOverlay && !mobileMenuOverlay.classList.contains('hidden')) {
+            if (e.key === 'Escape' && navMenu && navMenu.classList.contains('active')) {
+                console.log('Escape key pressed');
                 closeMobileMenu();
             }
         });
