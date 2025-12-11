@@ -4,24 +4,26 @@
 
 @section('content')
 <div class="bg-white rounded-lg shadow-md p-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6 pt-6 px-6">Renstra</h1>
-    
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Renstra</h1>
+
     @if($renstra && $renstra->deskripsi)
-        <div class="prose max-w-none p-6">
-            {!! $renstra->deskripsi !!}
-        </div>
+    <div class="prose max-w-none p-6">
+        {!! $renstra->deskripsi !!}
+    </div>
     @else
-        <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
-            <div class="flex items-center">
-                <svg class="w-6 h-6 text-yellow-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
-                </svg>
-                <div>
-                    <h3 class="text-lg font-medium text-yellow-800">Belum Ada Data</h3>
-                    <p class="text-yellow-600 mt-1">Renstra belum tersedia. Silakan hubungi administrator untuk mengisi konten ini.</p>
-                </div>
+    <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-6">
+        <div class="flex items-center">
+            <svg class="w-6 h-6 text-yellow-600 mr-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                    d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+            </svg>
+            <div>
+                <h3 class="text-lg font-medium text-yellow-800">Belum Ada Data</h3>
+                <p class="text-yellow-600 mt-1">Renstra belum tersedia. Silakan hubungi administrator untuk mengisi
+                    konten ini.</p>
             </div>
         </div>
+    </div>
     @endif
 </div>
 
@@ -44,12 +46,29 @@
         margin-bottom: 0.5em;
     }
 
-    .prose h1 { font-size: 2.25em; }
-    .prose h2 { font-size: 1.875em; }
-    .prose h3 { font-size: 1.5em; }
-    .prose h4 { font-size: 1.25em; }
-    .prose h5 { font-size: 1.125em; }
-    .prose h6 { font-size: 1em; }
+    .prose h1 {
+        font-size: 2.25em;
+    }
+
+    .prose h2 {
+        font-size: 1.875em;
+    }
+
+    .prose h3 {
+        font-size: 1.5em;
+    }
+
+    .prose h4 {
+        font-size: 1.25em;
+    }
+
+    .prose h5 {
+        font-size: 1.125em;
+    }
+
+    .prose h6 {
+        font-size: 1em;
+    }
 
     .prose p {
         margin-bottom: 1em;

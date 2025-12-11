@@ -4,7 +4,7 @@
 
 @section('content')
 <div class="bg-white rounded-lg shadow-md p-8">
-    <h1 class="text-3xl font-bold text-gray-800 mb-6 pt-6 px-6">Struktur Organisasi</h1>
+    <h1 class="text-3xl font-bold text-gray-800 mb-6">Struktur Organisasi</h1>
 
     @if($struktur && $struktur->deskripsi)
     <div class="prose max-w-none p-6">

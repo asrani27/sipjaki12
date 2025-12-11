@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Profil;
 use App\Models\Berita;
+use App\Models\Agenda;
 use Illuminate\Http\Request;
 
 class PortalController extends Controller
@@ -73,7 +74,8 @@ class PortalController extends Controller
      */
     public function berita()
     {
-        return view('portal.berita');
+        $berita = Berita::latest()->paginate(9);
+        return view('portal.berita', compact('berita'));
     }
 
     /**
@@ -81,7 +83,8 @@ class PortalController extends Controller
      */
     public function agenda()
     {
-        return view('portal.agenda');
+        $agenda = Agenda::latest()->paginate(10);
+        return view('portal.agenda', compact('agenda'));
     }
 
     /**
