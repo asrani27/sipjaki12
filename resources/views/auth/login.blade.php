@@ -305,7 +305,6 @@
                                 value="{{ old('username') }}"
                                 required
                                 autocomplete="username"
-                                autofocus
                             >
                         </div>
                         @error('username')
