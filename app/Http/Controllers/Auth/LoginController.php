@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class LoginController extends Controller
 {
@@ -33,6 +34,8 @@ class LoginController extends Controller
 
         // Custom authentication using username instead of email
         if (Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
+            Log::info('Auth successful for user: ' . $credentials['username']);
+            Log::info('Session ID: ' . session()->getId());
             $request->session()->regenerate();
 
             return redirect()->route('dashboard');
