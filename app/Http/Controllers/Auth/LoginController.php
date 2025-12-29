@@ -34,6 +34,7 @@ class LoginController extends Controller
         ]);
 
         // Custom authentication using username instead of email
+        dd(Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']]));
         if (Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
             return redirect('/dashboard');
         }
