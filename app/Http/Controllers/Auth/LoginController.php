@@ -35,21 +35,7 @@ class LoginController extends Controller
 
         // Custom authentication using username instead of email
         if (Auth::attempt(['username' => $credentials['username'], 'password' => $credentials['password']])) {
-            Log::info('Auth successful for user: ' . $credentials['username']);
-            Log::info('Session ID before regenerate: ' . session()->getId());
-            
-            $request->session()->regenerate();
-            
-            Log::info('Session ID after regenerate: ' . session()->getId());
-            Log::info('Auth check: ' . (Auth::check() ? 'YES' : 'NO'));
-            Log::info('User ID: ' . Auth::id());
-            Log::info('Redirecting to dashboard route');
-            Log::info('Route exists: ' . (Route::has('dashboard') ? 'YES' : 'NO'));
-
-            $response = redirect()->route('dashboard');
-            Log::info('Redirect target: ' . $response->getTargetUrl());
-            
-            return $response;
+            return redirect('/dashboard');
         }
 
         return back()->withErrors([

@@ -225,7 +225,7 @@
             <div class="flex items-center space-x-3">
                 <div
                     class="w-10 h-10 bg-gradient-to-r from-blue-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold">
-                    {{ substr(Auth::user()->name ?? 'A', 0, 1) }}
+                    {{ Auth::check() ? substr(Auth::user()->name, 0, 1) : 'A' }}
                 </div>
                 <div class="flex-1">
                     <p class="text-sm font-medium text-gray-900">{{ Auth::user()->name ?? 'Admin' }}</p>
