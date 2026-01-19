@@ -41,7 +41,7 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if($item->gambar)
                         <a href="{{ route('berita.show', $item->slug) }}" class="block">
-                            <img src="{{ asset('storage/berita/gambar/' . $item->gambar) }}" alt="{{ $item->judul }}"
+                            <img src="{{ Storage::disk('s3')->url('sipjaki/' . $item->gambar) }}" alt="{{ $item->judul }}"
                                 class="w-16 h-16 object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         </a>
                         @else

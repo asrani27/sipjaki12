@@ -49,7 +49,7 @@
             class="bg-white rounded-2xl shadow-xl overflow-hidden transform hover:scale-[1.02] transition-all duration-300">
             @if($berita->gambar)
             <div class="relative h-96 overflow-hidden group">
-                <img src="{{ asset('storage/berita/gambar/' . $berita->gambar) }}" alt="{{ $berita->judul }}"
+                <img src="{{ Storage::disk('s3')->url('sipjaki/' . $berita->gambar) }}" alt="{{ $berita->judul }}"
                     class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                 <div class="absolute inset-0 bg-gradient-to-t from-black/30 to-transparent"></div>
                 <!-- Category Badge on Image -->

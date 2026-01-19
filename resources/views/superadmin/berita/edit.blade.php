@@ -80,7 +80,7 @@
                             @if($berita->gambar)
                             <div class="mt-3">
                                 <p class="text-sm text-gray-600 mb-2">Gambar Saat Ini:</p>
-                                <img src="{{ asset('storage/berita/gambar/' . $berita->gambar) }}"
+                                <img src="{{ Storage::disk('s3')->url('sipjaki/' . $berita->gambar) }}"
                                     alt="{{ $berita->judul }}" class="w-full h-48 object-cover rounded-lg shadow-sm">
                             </div>
                             @endif
@@ -94,7 +94,7 @@
                             <div class="p-4 text-center">
                                 <div id="imagePreview" class="text-gray-400">
                                     @if($berita->gambar)
-                                    <img src="{{ asset('storage/berita/gambar/' . $berita->gambar) }}" alt="Current"
+                                    <img src="{{ Storage::disk('s3')->url('sipjaki/' . $berita->gambar) }}" alt="Current"
                                         class="w-full h-48 object-cover rounded-lg shadow-sm">
                                     <p class="mt-2 text-sm text-gray-500">Gambar saat ini (atau preview gambar baru)</p>
                                     @else
@@ -155,7 +155,7 @@ window.previewImage = function(input) {
         // Reset to original image
         @if($berita->gambar)
             preview.innerHTML = `
-                <img src="{{ asset('storage/berita/gambar/' . $berita->gambar) }}" alt="Current" 
+                <img src="{{ Storage::disk('s3')->url('sipjaki/' . $berita->gambar) }}" alt="Current" 
                      class="w-full h-48 object-cover rounded-lg shadow-sm">
                 <p class="mt-2 text-sm text-gray-500">Gambar saat ini (atau preview gambar baru)</p>
             `;

@@ -42,7 +42,7 @@
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <!-- Image Preview -->
                     <div class="aspect-video bg-gray-100 relative">
-                        <img src="{{ asset('storage/' . $slide->file) }}" 
+                        <img src="{{ Storage::disk('s3')->url($slide->file) }}" 
                              alt="Slide {{ $slide->id }}" 
                              class="w-full h-full object-cover">
                         
@@ -73,19 +73,6 @@
                             </span>
                         </div>
                         
-                        <!-- File Info -->
-                        <div class="mt-2 text-xs text-gray-500">
-                            @php
-                                $filePath = storage_path('app/public/' . $slide->file);
-                                if (file_exists($filePath)) {
-                                    $fileSize = filesize($filePath);
-                                    $fileSizeFormatted = number_format($fileSize / 1024, 2) . ' KB';
-                                } else {
-                                    $fileSizeFormatted = 'N/A';
-                                }
-                            @endphp
-                            Ukuran: {{ $fileSizeFormatted }}
-                        </div>
                         
                         <!-- Full Path -->
                         <div class="mt-1 text-xs text-gray-400 truncate" title="{{ $slide->file }}">

@@ -37,10 +37,10 @@ class SlideController extends Controller
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = time() . '_' . Str::random(10) . '.' . $file->getClientOriginalExtension();
+            $fileName = 'slides-' . Str::random(12) . '.' . $file->getClientOriginalExtension();
 
-            // Store the file in the public/slides directory
-            $filePath = $file->storeAs('slides', $fileName, 'public');
+            // Store the file in Minio via s3 disk
+            $filePath = $file->storeAs('sipjaki', $fileName, 's3');
 
             Slide::create([
                 'file' => $filePath,
@@ -59,9 +59,9 @@ class SlideController extends Controller
      */
     public function destroy(Slide $slide)
     {
-        // Delete the file from storage if it exists
-        if ($slide->file && Storage::disk('public')->exists($slide->file)) {
-            Storage::disk('public')->delete($slide->file);
+        // Delete the file from Minio storage if it exists
+        if ($slide->file && Storage::disk('s3')->exists($slide->file)) {
+            Storage::disk('s3')->delete($slide->file);
         }
 
         // Delete the record from database
