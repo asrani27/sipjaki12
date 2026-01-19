@@ -87,9 +87,9 @@
                             alt="Slide {{ $index + 1 }}" class="w-full h-full object-cover">
                         <div class="absolute bottom-0 left-0 right-0 p-6"
                             style="background: linear-gradient(to top, rgba(51, 95, 185, 0.9), rgba(242, 143, 7, 0.7), transparent);">
-                            <h3 class="text-white text-2xl font-bold mb-2">
+                            {{-- <h3 class="text-white text-2xl font-bold mb-2">
                                 {{ $slide->title ?? ('Slide ' . ($index + 1)) }}
-                            </h3>
+                            </h3> --}}
                             <p class="text-white/90">
                                 {{ $slide->description ?? 'Selamat datang di Portal Informasi SIPJAKI' }}
                             </p>
