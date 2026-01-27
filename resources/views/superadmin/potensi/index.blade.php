@@ -1,19 +1,19 @@
 @extends('layouts.app')
 
-@section('title', 'Kelola Pelatihan')
+@section('title', 'Kelola Potensi Pasar')
 
 @section('content')
 <div class="p-6">
     <!-- Header Section -->
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Kelola Pelatihan</h1>
-            <p class="text-gray-600 mt-1">Kelola data pelatihan SIPJAKI</p>
+            <h1 class="text-2xl font-bold text-gray-900">Kelola Potensi Pasar</h1>
+            <p class="text-gray-600 mt-1">Kelola data potensi pasar SIPJAKI</p>
         </div>
-        <a href="{{ route('superadmin.pelatihan.create') }}"
+        <a href="{{ route('superadmin.potensi.create') }}"
             class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
             <i class="fas fa-plus"></i>
-            <span>Tambah Pelatihan</span>
+            <span>Tambah Potensi</span>
         </a>
     </div>
 
@@ -50,16 +50,13 @@
                             Tahun
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                            Nama Pelatihan
+                            Sumber Dana
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                            Tanggal Mulai
+                            Besar Anggaran
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                            Tanggal Selesai
-                        </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
-                            Lokasi
+                            Penanggung Jawab
                         </th>
                         <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Aksi
@@ -67,39 +64,31 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse($pelatihan as $item)
+                    @forelse($potensi as $item)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {{ $pelatihan->firstItem() + $loop->index }}
+                            {{ $potensi->firstItem() + $loop->index }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             {{ $item->tahun }}
                         </td>
-                        <td class="px-6 py-4">
-                            <div class="text-sm font-medium text-gray-900">
-                                {{$item->nama }}
-                            </div>
-                            {{-- @if(Str::length($item->nama) > 50)
-                            <div class="text-sm text-gray-500">{{ Str::limit($item->nama, 70) }}</div>
-                            @endif --}}
+                        <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
+                            {{ $item->sumber_dana }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {{ \Carbon\Carbon::parse($item->waktu)->format('d/m/Y') }}
+                            Rp {{ number_format($item->besar_anggaran, 0, ',', '.') }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {{ \Carbon\Carbon::parse($item->selesai)->format('d/m/Y') }}
-                        </td>
-                        <td class="px-6 py-4 text-sm text-gray-900">
-                            {{ $item->lokasi }}
+                            {{ $item->penanggung_jawab }}
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex items-center space-x-2">
-                                <a href="{{ route('superadmin.pelatihan.edit', $item) }}"
+                                <a href="{{ route('superadmin.potensi.edit', $item) }}"
                                     class="text-amber-600 hover:text-amber-900 transition-colors" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('superadmin.pelatihan.destroy', $item) }}" method="POST"
-                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus pelatihan ini?')"
+                                <form action="{{ route('superadmin.potensi.destroy', $item) }}" method="POST"
+                                    onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
                                     class="inline">
                                     @csrf
                                     @method('DELETE')
@@ -113,11 +102,11 @@
                     </tr>
                     @empty
                     <tr>
-                        <td colspan="7" class="px-6 py-12 text-center">
+                        <td colspan="6" class="px-6 py-12 text-center">
                             <div class="text-gray-500">
-                                <i class="fas fa-book-open text-4xl mb-3 block"></i>
-                                <span class="text-lg">Tidak ada data pelatihan</span>
-                                <p class="text-sm mt-1">Mulai dengan menambahkan pelatihan baru</p>
+                                <i class="fas fa-chart-line text-4xl mb-3 block"></i>
+                                <span class="text-lg">Tidak ada data potensi pasar</span>
+                                <p class="text-sm mt-1">Mulai dengan menambahkan data baru</p>
                             </div>
                         </td>
                     </tr>
@@ -128,9 +117,9 @@
     </div>
 
     <!-- Pagination -->
-    @if($pelatihan->hasPages())
+    @if($potensi->hasPages())
     <div class="mt-6 flex justify-center">
-        {{ $pelatihan->links() }}
+        {{ $potensi->links() }}
     </div>
     @endif
 </div>

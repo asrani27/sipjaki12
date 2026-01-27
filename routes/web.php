@@ -1,9 +1,12 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\PelatihanController;
+use App\Http\Controllers\PotensiController;
 use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Auth\LoginController;
+use App\Http\Controllers\Auth\TwoFAController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\SuperadminController;
 use App\Http\Controllers\BeritaController;
@@ -56,8 +59,17 @@ Route::post('/forgot-password', function () {
     return back()->with('status', 'Link reset password telah dikirim ke email Anda.');
 })->name('password.email');
 
+// 2FA Routes
+Route::middleware(['auth'])->prefix('2fa')->name('2fa.')->group(function () {
+    Route::get('/setup', [TwoFAController::class, 'showSetup'])->name('setup');
+    Route::post('/enable', [TwoFAController::class, 'enable'])->name('enable');
+    Route::get('/disable', [TwoFAController::class, 'showDisable'])->name('disable.show');
+    Route::post('/disable', [TwoFAController::class, 'disable'])->name('disable');
+    Route::get('/verify', [TwoFAController::class, 'verify'])->name('verify');
+});
+
 // Protected Routes (require authentication)
-Route::middleware(['auth'])->group(function () {
+Route::middleware(['auth', '2fa'])->group(function () {
     Route::get('/dashboard', function () {
         return view('superadmin.dashboard');
     })->name('dashboard');
@@ -83,6 +95,12 @@ Route::middleware(['auth'])->group(function () {
 
         // Agenda Routes
         Route::resource('agenda', AgendaController::class);
+
+        // Pelatihan Routes
+        Route::resource('pelatihan', PelatihanController::class);
+
+        // Potensi Pasar Routes
+        Route::resource('potensi', PotensiController::class);
 
         // Slideshow Routes
         Route::resource('slideshow', SlideController::class)->parameters([

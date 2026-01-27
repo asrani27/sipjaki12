@@ -62,7 +62,7 @@
             font-weight: 600;
             color: #374151 !important;
             transition: all 0.3s ease;
-            padding: 0.7rem 0.5rem;
+            padding: 0.7rem 0.2rem;
             border-radius: 0.5rem;
             margin: 0.25rem;
             display: flex;
@@ -384,7 +384,7 @@
                 <!-- Desktop Menu -->
                 <ul class="nav-list hidden lg:flex items-center space-x-0">
                     <li class="nav-item">
-                        <a href="/" class="nav-link px-4 py-4 block">
+                        <a href="/" class="nav-link py-4 block">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -395,7 +395,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <button class="nav-link px-4 py-4 block w-full text-left">
+                        <button class="nav-link py-4 block w-full text-left">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -442,7 +442,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <button class="nav-link px-4 py-4 block w-full text-left">
+                        <button class="nav-link py-4 block w-full text-left">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -479,7 +479,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <button class="nav-link px-4 py-4 block w-full text-left">
+                        <button class="nav-link py-4 block w-full text-left">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -493,6 +493,16 @@
                             </span>
                         </button>
                         <div class="dropdown-menu">
+                            <a href="{{ route('pelatihan') }}" class="dropdown-item">
+                                <div class="flex items-center space-x-3">
+                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                        <path fill-rule="evenodd"
+                                            d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
+                                            clip-rule="evenodd" />
+                                    </svg>
+                                    <span>Pelatihan</span>
+                                </div>
+                            </a>
                             <a href="{{ route('sertifikasi') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
                                     <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
@@ -516,7 +526,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <button class="nav-link px-4 py-4 block w-full text-left">
+                        <button class="nav-link py-4 block w-full text-left">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -565,7 +575,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <button class="nav-link px-4 py-4 block w-full text-left">
+                        <button class="nav-link py-4 block w-full text-left">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -603,7 +613,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('tim-pembina') }}" class="nav-link px-4 py-4 block">
+                        <a href="{{ route('tim-pembina') }}" class="nav-link py-4 block">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -615,7 +625,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <button class="nav-link px-4 py-4 block w-full text-left">
+                        <button class="nav-link py-4 block w-full text-left">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -653,7 +663,7 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('potensi-pasar') }}" class="nav-link px-4 py-4 block">
+                        <a href="{{ route('potensi-pasar') }}" class="nav-link py-4 block">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -665,13 +675,24 @@
                     </li>
 
                     <li class="nav-item">
-                        <a href="{{ route('peraturan') }}" class="nav-link px-4 py-4 block">
+                        <a href="{{ route('peraturan') }}" class="nav-link py-4 block">
                             <span class="flex items-center space-x-2">
                                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                         d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                 </svg>
                                 <span>Peraturan</span>
+                            </span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="{{ route('login') }}" class="nav-link py-4 block">
+                            <span class="flex items-center space-x-2">
+                                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                        d="M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1" />
+                                </svg>
+                                <span>Login</span>
                             </span>
                         </a>
                     </li>

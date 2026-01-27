@@ -1,6 +1,6 @@
 <!-- Sidebar -->
 <aside id="sidebar"
-    class="sidebar-transition w-64 bg-white shadow-xl flex-shrink-0 fixed lg:relative h-full z-40 -translate-x-full lg:translate-x-0">
+    class="sidebar-transition w-72 bg-white shadow-xl flex-shrink-0 fixed lg:relative h-full z-40 -translate-x-full lg:translate-x-0">
 
     <div class="flex flex-col h-full">
         <!-- Logo Section -->
@@ -20,7 +20,7 @@
         <nav class="flex-1 px-4 py-6 space-y-2 custom-scrollbar overflow-y-auto">
             <!-- Beranda -->
             <a href="{{ route('dashboard') }}"
-                class="flex items-center space-x-3 px-4 py-3 {{ request()->routeIs('dashboard') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-700' }} rounded-lg hover:bg-blue-100 transition-colors">
+                class="flex items-center space-x-3 px-4 py-2 {{ request()->routeIs('dashboard') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-700' }} rounded-lg hover:bg-blue-100 transition-colors">
                 <svg class="w-5 h-5 {{ request()->routeIs('dashboard') ? 'text-blue-600' : 'text-gray-500' }}"
                     fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -33,7 +33,7 @@
             <!-- Profil -->
             <div class="nav-item">
                 <button onclick="toggleSubmenu('profil-submenu')"
-                    class="flex items-center justify-between w-full px-4 py-3 {{ request()->routeIs('superadmin.profil.*') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    class="flex items-center justify-between w-full px-4 py-2 {{ request()->routeIs('superadmin.profil.*') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <span class="flex items-center space-x-3">
                         <svg class="w-5 h-5 {{ request()->routeIs('superadmin.profil.*') ? 'text-blue-600' : 'text-gray-500' }}"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -63,7 +63,7 @@
             <!-- Informasi -->
             <div class="nav-item">
                 <button onclick="toggleSubmenu('informasi-submenu')"
-                    class="flex items-center justify-between w-full px-4 py-3 {{ request()->routeIs('superadmin.berita.*') || request()->routeIs('superadmin.agenda.*') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    class="flex items-center justify-between w-full px-4 py-2 {{ request()->routeIs('superadmin.berita.*') || request()->routeIs('superadmin.agenda.*') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <span class="flex items-center space-x-3">
                         <svg class="w-5 h-5 {{ request()->routeIs('superadmin.berita.*') || request()->routeIs('superadmin.agenda.*') ? 'text-blue-600' : 'text-gray-500' }}"
                             fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -82,36 +82,25 @@
                     class="submenu pl-12 space-y-1 {{ request()->routeIs('superadmin.berita.*') || request()->routeIs('superadmin.agenda.*') ? 'open' : '' }}">
                     <a href="{{ route('superadmin.berita.index') }}"
                         class="block px-4 py-2 text-sm {{ request()->routeIs('superadmin.berita.*') ? 'text-blue-600 font-medium' : 'text-gray-600' }} hover:text-gray-900">Berita</a>
-                    <a href="{{ route('superadmin.agenda.index') }}" class="block px-4 py-2 text-sm {{ request()->routeIs('superadmin.agenda.*') ? 'text-blue-600 font-medium' : 'text-gray-600' }} hover:text-gray-900">Agenda</a>
+                    <a href="{{ route('superadmin.agenda.index') }}"
+                        class="block px-4 py-2 text-sm {{ request()->routeIs('superadmin.agenda.*') ? 'text-blue-600 font-medium' : 'text-gray-600' }} hover:text-gray-900">Agenda</a>
                 </div>
             </div>
 
             <!-- Pelatihan -->
-            <div class="nav-item">
-                <button onclick="toggleSubmenu('pelatihan-submenu')"
-                    class="flex items-center justify-between w-full px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
-                    <span class="flex items-center space-x-3">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                                d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
-                        </svg>
-                        <span>Pelatihan</span>
-                    </span>
-                    <svg id="pelatihan-arrow" class="w-4 h-4 arrow-icon" fill="none" stroke="currentColor"
-                        viewBox="0 0 24 24">
-                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
-                    </svg>
-                </button>
-                <div id="pelatihan-submenu" class="submenu pl-12 space-y-1">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900">Sertifikasi</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900">Bimtek</a>
-                </div>
-            </div>
+            <a href="{{ route('pelatihan') }}"
+                class="flex items-center space-x-3 px-4 py-2 {{ request()->routeIs('pelatihan') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <svg class="w-5 h-5 {{ request()->routeIs('pelatihan') ? 'text-blue-600' : 'text-gray-500' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253" />
+                </svg>
+                <span>Pelatihan</span>
+            </a>
 
             <!-- Pengawasan -->
             <div class="nav-item">
                 <button onclick="toggleSubmenu('pengawasan-submenu')"
-                    class="flex items-center justify-between w-full px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    class="flex items-center justify-between w-full px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <span class="flex items-center space-x-3">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -137,7 +126,7 @@
             <!-- Jakon -->
             <div class="nav-item">
                 <button onclick="toggleSubmenu('jakon-submenu')"
-                    class="flex items-center justify-between w-full px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    class="flex items-center justify-between w-full px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <span class="flex items-center space-x-3">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -159,7 +148,7 @@
 
             <!-- Tim Pembina -->
             <a href="#"
-                class="flex items-center space-x-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                class="flex items-center space-x-3 px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z" />
@@ -170,7 +159,7 @@
             <!-- SPM -->
             <div class="nav-item">
                 <button onclick="toggleSubmenu('spm-submenu')"
-                    class="flex items-center justify-between w-full px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    class="flex items-center justify-between w-full px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <span class="flex items-center space-x-3">
                         <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -190,9 +179,9 @@
             </div>
 
             <!-- Potensi Pasar -->
-            <a href="#"
-                class="flex items-center space-x-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="{{ route('superadmin.potensi.index') }}"
+                class="flex items-center space-x-3 px-4 py-2 {{ request()->routeIs('superadmin.potensi.*') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <svg class="w-5 h-5 {{ request()->routeIs('superadmin.potensi.*') ? 'text-blue-600' : 'text-gray-500' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6" />
                 </svg>
@@ -201,7 +190,7 @@
 
             <!-- Peraturan -->
             <a href="#"
-                class="flex items-center space-x-3 px-4 py-3 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                class="flex items-center space-x-3 px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
@@ -210,9 +199,10 @@
             </a>
 
             <!-- Slideshow -->
-            <a href="{{ route('superadmin.slideshow.index') }}" 
-                class="flex items-center space-x-3 px-4 py-3 {{ request()->routeIs('superadmin.slideshow.*') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
-                <svg class="w-5 h-5 {{ request()->routeIs('superadmin.slideshow.*') ? 'text-blue-600' : 'text-gray-500' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="{{ route('superadmin.slideshow.index') }}"
+                class="flex items-center space-x-3 px-4 py-2 {{ request()->routeIs('superadmin.slideshow.*') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                <svg class="w-5 h-5 {{ request()->routeIs('superadmin.slideshow.*') ? 'text-blue-600' : 'text-gray-500' }}"
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                         d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
@@ -223,8 +213,8 @@
         <!-- User Profile Section -->
         <div class="border-t border-gray-200 p-4">
             <div class="flex items-center space-x-3">
-                <div
-                    class="w-10 h-10 bg-gradient-to-r from-blue-500 to-orange-500 rounded-full flex items-center justify-center text-white font-bold">
+                <div class="w-10 h-10 rounded-full flex items-center justify-center text-white font-bold"
+                    style="background: linear-gradient(135deg, rgb(51, 95, 185) 0%, rgb(242, 143, 7) 100%);">
                     {{ Auth::check() ? substr(Auth::user()->name, 0, 1) : 'A' }}
                 </div>
                 <div class="flex-1">

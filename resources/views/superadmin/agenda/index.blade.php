@@ -19,7 +19,7 @@
 
     <!-- Success Alert -->
     @if(session('success'))
-    <div class="bg-green-50 border-l-4 border-green-400 p-4 mb-6 rounded-lg">
+    <div class="bg-green-50 border border-green-400 p-3 mb-6 rounded-lg shadow-md">
         <div class="flex items-center">
             <div class="flex-shrink-0">
                 <i class="fas fa-check-circle text-green-400"></i>
@@ -41,27 +41,27 @@
     <div class="bg-white shadow-sm rounded-lg overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+                <thead style="background: linear-gradient(72deg, rgb(51, 95, 185) 0%, rgb(242, 143, 7) 100%);">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             No
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Tanggal
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Waktu
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Acara
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Tempat
                         </th>
-                        {{-- <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        {{-- <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Penanggung Jawab
                         </th> --}}
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Aksi
                         </th>
                     </tr>

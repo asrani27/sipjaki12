@@ -42,9 +42,9 @@ class BeritaController extends Controller
 
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
-            $namaGambar = time() . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move(public_path('storage/berita/gambar'), $namaGambar);
-            $data['gambar'] = $namaGambar;
+            $namaGambar =  'berita-' . uniqid() . '.' . $gambar->getClientOriginalExtension();
+            $path = Storage::disk('s3')->putFileAs('sipjaki', $gambar, $namaGambar);
+            $data['gambar'] = basename($path);
         }
 
         Berita::create($data);
@@ -76,18 +76,16 @@ class BeritaController extends Controller
         $data['slug'] = Str::slug($request->judul);
 
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama
+            // Hapus gambar lama dari S3
             if ($berita->gambar) {
-                $oldImagePath = public_path('storage/berita/gambar/' . $berita->gambar);
-                if (file_exists($oldImagePath)) {
-                    unlink($oldImagePath);
-                }
+                Storage::disk('s3')->delete('sipjaki/' . $berita->gambar);
             }
 
+            // Upload gambar baru ke S3
             $gambar = $request->file('gambar');
-            $namaGambar = time() . '.' . $gambar->getClientOriginalExtension();
-            $gambar->move(public_path('storage/berita/gambar'), $namaGambar);
-            $data['gambar'] = $namaGambar;
+            $namaGambar = 'berita-' . uniqid() . '.' . $gambar->getClientOriginalExtension();
+            $path = Storage::disk('s3')->putFileAs('sipjaki', $gambar, $namaGambar);
+            $data['gambar'] = basename($path);
         }
 
         $berita->update($data);
@@ -110,12 +108,9 @@ class BeritaController extends Controller
      */
     public function destroy(Berita $berita)
     {
-        // Hapus gambar jika ada
+        // Hapus gambar dari S3 jika ada
         if ($berita->gambar) {
-            $imagePath = public_path('gambar/' . $berita->gambar);
-            if (file_exists($imagePath)) {
-                unlink($imagePath);
-            }
+            Storage::disk('s3')->delete('sipjaki/' . $berita->gambar);
         }
 
         $berita->delete();

@@ -342,6 +342,14 @@
                         </label>
                     </div>
 
+                    <!-- Cloudflare Turnstile CAPTCHA -->
+                    <div class="form-group">
+                        <div class="cf-turnstile" data-sitekey="{{ env('TURNSTILE_SITE_KEY') }}"></div>
+                        @error('captcha')
+                            <span class="error-message">{{ $message }}</span>
+                        @enderror
+                    </div>
+
                     <!-- Submit Button -->
                     <button type="submit" class="btn-submit">
                         Masuk
@@ -382,6 +390,9 @@
         `;
         document.head.appendChild(style);
     </script>
+
+    <!-- Cloudflare Turnstile Script -->
+    <script src="https://challenges.cloudflare.com/turnstile/v0/api.js" async defer></script>
 </body>
 
 </html>

@@ -7,6 +7,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Auth\Authenticatable as AuthenticatableTrait;
+use PragmaRX\Google2FA\Support\Constants;
 
 class User extends Authenticatable
 {
@@ -23,6 +24,8 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
+        'google2fa_secret',
+        'google2fa_enabled',
     ];
 
     /**
@@ -77,5 +80,27 @@ class User extends Authenticatable
     public function getAuthPassword()
     {
         return $this->password;
+    }
+
+    /**
+     * Encrypt the user's google_2fa secret.
+     *
+     * @param  string  $value
+     * @return void
+     */
+    public function setGoogle2faSecretAttribute($value)
+    {
+        $this->attributes['google2fa_secret'] = encrypt($value);
+    }
+
+    /**
+     * Decrypt the user's google_2fa secret.
+     *
+     * @param  string  $value
+     * @return string
+     */
+    public function getGoogle2faSecretAttribute($value)
+    {
+        return decrypt($value);
     }
 }

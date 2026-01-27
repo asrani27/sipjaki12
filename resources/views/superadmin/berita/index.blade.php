@@ -41,21 +41,21 @@
     <div class="bg-white shadow-sm rounded-lg overflow-hidden">
         <div class="overflow-x-auto">
             <table class="min-w-full divide-y divide-gray-200">
-                <thead class="bg-gray-50">
+                <thead style="background: linear-gradient(72deg, rgb(51, 95, 185) 0%, rgb(242, 143, 7) 100%);">
                     <tr>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             No
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Gambar
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Judul
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Tanggal
                         </th>
-                        <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                        <th class="px-6 py-3 text-left text-xs font-medium text-white uppercase tracking-wider">
                             Aksi
                         </th>
                     </tr>
@@ -68,8 +68,8 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($item->gambar)
-                            <img src="{{ Storage::disk('s3')->url('sipjaki/' . $item->gambar) }}" alt="{{ $item->judul }}"
-                                class="h-16 w-24 object-cover rounded-lg shadow-sm">
+                            <img src="{{ Storage::disk('s3')->url('sipjaki/' . $item->gambar) }}"
+                                alt="{{ $item->judul }}" class="h-16 w-24 object-cover rounded-lg shadow-sm">
                             @else
                             <div class="h-16 w-24 bg-gray-200 rounded-lg flex items-center justify-center">
                                 <i class="fas fa-image text-gray-400"></i>

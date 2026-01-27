@@ -96,7 +96,8 @@ class PortalController extends Controller
      */
     public function pelatihan()
     {
-        return view('portal.pelatihan');
+        $pelatihan = \App\Models\Pelatihan::latest()->paginate(10);
+        return view('portal.pelatihan', compact('pelatihan'));
     }
 
     /**
@@ -208,7 +209,8 @@ class PortalController extends Controller
      */
     public function potensiPasar()
     {
-        return view('portal.potensi-pasar');
+        $potensi = \App\Models\Potensi::latest()->paginate(10);
+        return view('portal.potensi-pasar', compact('potensi'));
     }
 
     /**
