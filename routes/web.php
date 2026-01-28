@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AgendaController;
+use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\PelatihanController;
 use App\Http\Controllers\PotensiController;
 use App\Http\Controllers\SlideController;
@@ -101,6 +102,9 @@ Route::middleware(['auth', '2fa'])->group(function () {
 
         // Potensi Pasar Routes
         Route::resource('potensi', PotensiController::class);
+
+        // Peraturan Routes
+        Route::resource('peraturan', PeraturanController::class);
 
         // Slideshow Routes
         Route::resource('slideshow', SlideController::class)->parameters([

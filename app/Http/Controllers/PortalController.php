@@ -15,7 +15,8 @@ class PortalController extends Controller
     public function welcome()
     {
         $berita = Berita::latest()->take(4)->get();
-        return view('welcome', compact('berita'));
+        $pengumuman = \App\Models\Pengumuman::latest()->first();
+        return view('welcome', compact('berita', 'pengumuman'));
     }
     public function welcome2()
     {
