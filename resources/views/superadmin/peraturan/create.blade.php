@@ -2,6 +2,125 @@
 
 @section('title', 'Tambah Peraturan')
 
+@push('styles')
+<style>
+    .upload-area {
+        border: 2px dashed #d1d5db;
+        border-radius: 0.5rem;
+        padding: 2rem;
+        text-align: center;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+    
+    .upload-area:hover {
+        border-color: #3b82f6;
+        background-color: #eff6ff;
+    }
+    
+    .upload-area.dragover {
+        border-color: #3b82f6;
+        background-color: #dbeafe;
+    }
+    
+    .progress-container {
+        margin-top: 1rem;
+        display: none;
+    }
+    
+    .progress-container.active {
+        display: block;
+    }
+    
+    .progress-bar {
+        height: 1rem;
+        background-color: #e5e7eb;
+        border-radius: 0.5rem;
+        overflow: hidden;
+    }
+    
+    .progress-fill {
+        height: 100%;
+        background-color: #3b82f6;
+        transition: width 0.3s ease;
+        border-radius: 0.5rem;
+    }
+    
+    .progress-text {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+    
+    .file-info {
+        margin-top: 1rem;
+        padding: 0.75rem;
+        background-color: #f3f4f6;
+        border-radius: 0.5rem;
+        display: none;
+    }
+    
+    .file-info.active {
+        display: block;
+    }
+    
+    .file-name {
+        font-weight: 600;
+        color: #1f2937;
+        margin-bottom: 0.25rem;
+    }
+    
+    .file-size {
+        font-size: 0.875rem;
+        color: #6b7280;
+    }
+    
+    .upload-status {
+        margin-top: 0.5rem;
+        font-size: 0.875rem;
+        font-weight: 500;
+    }
+    
+    .upload-status.uploading {
+        color: #3b82f6;
+    }
+    
+    .upload-status.success {
+        color: #10b981;
+    }
+    
+    .upload-status.error {
+        color: #ef4444;
+    }
+    
+    .btn-upload {
+        background-color: #3b82f6;
+        color: white;
+        padding: 0.5rem 1rem;
+        border-radius: 0.375rem;
+        border: none;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background-color 0.2s;
+    }
+    
+    .btn-upload:hover {
+        background-color: #2563eb;
+    }
+    
+    .btn-upload:disabled {
+        background-color: #9ca3af;
+        cursor: not-allowed;
+    }
+    
+    .btn-upload:disabled:hover {
+        background-color: #9ca3af;
+    }
+</style>
+@endpush
+
 @section('content')
 <div class="p-6">
     <!-- Page Header -->
@@ -39,8 +158,9 @@
     <!-- Form Card -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
         <div class="p-6">
-            <form method="POST" action="{{ route('superadmin.peraturan.store') }}" enctype="multipart/form-data">
+            <form method="POST" action="{{ route('superadmin.peraturan.store') }}" enctype="multipart/form-data" id="peraturanForm">
                 @csrf
+                <input type="hidden" name="file_path" id="file_path" value="">
 
                 <!-- Form Row 1 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -109,18 +229,45 @@
                     @enderror
                 </div>
 
-                <!-- File -->
+                <!-- File Upload with TUS -->
                 <div class="mb-6">
-                    <label for="file" class="block text-sm font-medium text-gray-700 mb-2">
+                    <label class="block text-sm font-medium text-gray-700 mb-2">
                         File (PDF, DOC, DOCX) - Maksimal 10MB
                     </label>
-                    <input type="file" name="file" id="file"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        accept=".pdf,.doc,.docx">
+                    
+                    <div class="upload-area" id="uploadArea" data-endpoint="{{ route('superadmin.peraturan.tus-upload.create') }}">
+                        <i class="fas fa-cloud-upload-alt text-4xl text-gray-400 mb-3"></i>
+                        <p class="text-gray-600 mb-2">Drag & drop file di sini atau klik untuk memilih</p>
+                        <p class="text-sm text-gray-500">Format yang diperbolehkan: PDF, DOC, DOCX (Maksimal 10MB)</p>
+                        <input type="file" id="fileInput" accept=".pdf,.doc,.docx" class="hidden">
+                    </div>
+                    
+                    <!-- File Info -->
+                    <div class="file-info" id="fileInfo">
+                        <div class="file-name" id="fileName"></div>
+                        <div class="file-size" id="fileSize"></div>
+                    </div>
+                    
+                    <!-- Progress Bar -->
+                    <div class="progress-container" id="progressContainer">
+                        <div class="progress-bar">
+                            <div class="progress-fill" id="progressFill" style="width: 0%"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span id="progressPercentage">0%</span>
+                            <span id="progressStatus">Menunggu...</span>
+                        </div>
+                        <div class="upload-status" id="uploadStatus"></div>
+                    </div>
+                    
+                    <button type="button" class="btn-upload mt-3" id="uploadBtn" disabled>
+                        <i class="fas fa-upload mr-2"></i>
+                        Upload File
+                    </button>
+                    
                     @error('file')
                     <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                     @enderror
-                    <p class="mt-1 text-sm text-gray-500">Format yang diperbolehkan: PDF, DOC, DOCX (Maksimal 10MB)</p>
                 </div>
 
                 <!-- Action Buttons -->
@@ -131,7 +278,7 @@
                         <span>Kembali</span>
                     </a>
                     <div class="space-x-3">
-                        <button type="submit"
+                        <button type="submit" id="submitBtn"
                             class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
                             <i class="fas fa-save"></i>
                             <span>Simpan</span>
@@ -142,4 +289,8 @@
         </div>
     </div>
 </div>
+
+@push('scripts')
+<!-- TUS upload functionality is loaded in app.js -->
+@endpush
 @endsection

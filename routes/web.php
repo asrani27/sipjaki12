@@ -106,6 +106,8 @@ Route::middleware(['auth', '2fa'])->group(function () {
 
         // Peraturan Routes
         Route::resource('peraturan', PeraturanController::class);
+        Route::post('peraturan/tus-upload', [PeraturanController::class, 'tusUpload'])->name('peraturan.tus-upload.create');
+        Route::match(['patch', 'head'], 'peraturan/tus-upload/{file_id}', [PeraturanController::class, 'tusUpload'])->name('peraturan.tus-upload');
 
         // Slideshow Routes
         Route::resource('slideshow', SlideController::class)->parameters([
