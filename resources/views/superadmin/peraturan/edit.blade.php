@@ -123,7 +123,7 @@
                     @enderror
                     @if($peraturan->file)
                     <p class="mt-2 text-sm text-gray-600">
-                        File saat ini: <a href="{{ asset('uploads/peraturan/' . $peraturan->file) }}" target="_blank" class="text-blue-600 hover:text-blue-900">{{ $peraturan->file }}</a>
+                        File saat ini: <a href="{{ Storage::disk('s3')->url('sipjaki/' . $peraturan->file) }}" target="_blank" class="text-blue-600 hover:text-blue-900">{{ $peraturan->file }}</a>
                     </p>
                     @endif
                     <p class="mt-1 text-sm text-gray-500">Format yang diperbolehkan: PDF, DOC, DOCX (Maksimal 10MB)</p>

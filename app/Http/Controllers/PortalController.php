@@ -219,6 +219,7 @@ class PortalController extends Controller
      */
     public function peraturan()
     {
-        return view('portal.peraturan');
+        $peraturan = \App\Models\Peraturan::latest()->paginate(10);
+        return view('portal.peraturan', compact('peraturan'));
     }
 }

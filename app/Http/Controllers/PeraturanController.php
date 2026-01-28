@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Peraturan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PeraturanController extends Controller
 {
@@ -41,9 +42,9 @@ class PeraturanController extends Controller
 
         if ($request->hasFile('file')) {
             $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/peraturan'), $fileName);
-            $data['file'] = $fileName;
+            $fileName = 'peraturan-' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = Storage::disk('s3')->putFileAs('sipjaki', $file, $fileName);
+            $data['file'] = basename($path);
         }
 
         Peraturan::create($data);
@@ -76,15 +77,16 @@ class PeraturanController extends Controller
         $data = $request->except('file');
 
         if ($request->hasFile('file')) {
-            // Delete old file if exists
-            if ($peraturan->file && file_exists(public_path('uploads/peraturan/' . $peraturan->file))) {
-                unlink(public_path('uploads/peraturan/' . $peraturan->file));
+            // Hapus file lama dari S3
+            if ($peraturan->file) {
+                Storage::disk('s3')->delete('sipjaki/' . $peraturan->file);
             }
 
+            // Upload file baru ke S3
             $file = $request->file('file');
-            $fileName = time() . '_' . $file->getClientOriginalName();
-            $file->move(public_path('uploads/peraturan'), $fileName);
-            $data['file'] = $fileName;
+            $fileName = 'peraturan-' . uniqid() . '.' . $file->getClientOriginalExtension();
+            $path = Storage::disk('s3')->putFileAs('sipjaki', $file, $fileName);
+            $data['file'] = basename($path);
         }
 
         $peraturan->update($data);
@@ -98,9 +100,9 @@ class PeraturanController extends Controller
      */
     public function destroy(Peraturan $peraturan)
     {
-        // Delete file if exists
-        if ($peraturan->file && file_exists(public_path('uploads/peraturan/' . $peraturan->file))) {
-            unlink(public_path('uploads/peraturan/' . $peraturan->file));
+        // Hapus file dari S3 jika ada
+        if ($peraturan->file) {
+            Storage::disk('s3')->delete('sipjaki/' . $peraturan->file);
         }
 
         $peraturan->delete();

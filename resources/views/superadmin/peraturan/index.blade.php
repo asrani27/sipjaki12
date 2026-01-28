@@ -90,7 +90,7 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             @if($item->file)
-                            <a href="{{ asset('uploads/peraturan/' . $item->file) }}" target="_blank"
+                            <a href="{{ Storage::disk('s3')->url('sipjaki/' . $item->file) }}" target="_blank"
                                 class="text-blue-600 hover:text-blue-900 transition-colors" title="Download File">
                                 <i class="fas fa-file-pdf"></i>
                             </a>
