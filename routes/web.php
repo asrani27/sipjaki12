@@ -41,6 +41,7 @@ Route::controller(PortalController::class)->group(function () {
     Route::get('/spm-laporan', 'spmLaporan')->name('spm-laporan');
     Route::get('/potensi-pasar', 'potensiPasar')->name('potensi-pasar');
     Route::get('/peraturan', 'peraturan')->name('peraturan');
+    Route::get('/peraturan/{peraturan}/download', 'downloadPeraturan')->name('peraturan.download');
 });
 
 // Berita Detail Route (public access)

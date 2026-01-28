@@ -5,7 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\Profil;
 use App\Models\Berita;
 use App\Models\Agenda;
+use App\Models\Peraturan;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PortalController extends Controller
 {
@@ -221,5 +223,37 @@ class PortalController extends Controller
     {
         $peraturan = \App\Models\Peraturan::latest()->paginate(10);
         return view('portal.peraturan', compact('peraturan'));
+    }
+
+    /**
+     * Download peraturan file from S3.
+     */
+    public function downloadPeraturan(Peraturan $peraturan)
+    {
+
+        if (!$peraturan->file) {
+            abort(404, 'File tidak ditemukan');
+        }
+
+        $filePath = 'sipjaki/' . $peraturan->file;
+
+        if (!Storage::disk('s3')->exists($filePath)) {
+            abort(404, 'File tidak ditemukan di storage');
+        }
+
+        $file = Storage::disk('s3')->get($filePath);
+
+        // Determine mime type based on file extension
+        $extension = pathinfo($peraturan->file, PATHINFO_EXTENSION);
+        $mimeTypes = [
+            'pdf' => 'application/pdf',
+            'doc' => 'application/msword',
+            'docx' => 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+        ];
+        $mimeType = $mimeTypes[$extension] ?? 'application/octet-stream';
+
+        return response($file)
+            ->header('Content-Type', $mimeType)
+            ->header('Content-Disposition', 'attachment; filename="' . $peraturan->file . '"');
     }
 }
