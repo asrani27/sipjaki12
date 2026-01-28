@@ -137,7 +137,7 @@ export function initTusUpload() {
                 filename: fileName,
                 filetype: file.type,
             },
-            chunkSize: 5 * 1024 * 1024, // 5MB chunks
+            chunkSize: 500 * 1024, // 500KB chunks
             uploadSize: file.size,
             onError: function(error) {
                 console.error('Upload failed:', error);
