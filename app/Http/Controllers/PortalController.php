@@ -230,15 +230,20 @@ class PortalController extends Controller
      */
     public function downloadPeraturan(Peraturan $peraturan)
     {
-
         if (!$peraturan->file) {
-            abort(404, 'File tidak ditemukan');
+            return response()->json([
+                'success' => false,
+                'message' => 'File tidak ditemukan'
+            ], 404);
         }
 
         $filePath = 'sipjaki/' . $peraturan->file;
 
         if (!Storage::disk('s3')->exists($filePath)) {
-            abort(404, 'File tidak ditemukan di storage');
+            return response()->json([
+                'success' => false,
+                'message' => 'File tidak ditemukan di storage'
+            ], 404);
         }
 
         $file = Storage::disk('s3')->get($filePath);
