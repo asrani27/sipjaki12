@@ -1,13 +1,13 @@
 @extends('layouts.app')
 
-@section('title', 'Tambah Tertib Usaha')
+@section('title', 'Tambah Tertib Penyelenggara')
 
 @section('content')
 <div class="p-6">
     <!-- Page Header -->
     <div class="mb-6">
-        <h1 class="text-2xl font-bold text-gray-900 mb-2">Tambah Data Tertib Usaha</h1>
-        <p class="text-gray-600">Tambahkan data pengawasan tertib usaha baru</p>
+        <h1 class="text-2xl font-bold text-gray-900 mb-2">Tambah Data Tertib Penyelenggara</h1>
+        <p class="text-gray-600">Tambahkan data pengawasan tertib penyelenggara baru</p>
     </div>
 
     <!-- Breadcrumb -->
@@ -22,8 +22,8 @@
             <li>
                 <div class="flex items-center">
                     <i class="fas fa-chevron-right text-gray-400 mr-2"></i>
-                    <a href="{{ route('superadmin.pengawasan.tertib_usaha.index') }}" class="text-gray-700 hover:text-gray-900">
-                        Tertib Usaha
+                    <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.index') }}" class="text-gray-700 hover:text-gray-900">
+                        Tertib Penyelenggara
                     </a>
                 </div>
             </li>
@@ -39,7 +39,7 @@
     <!-- Form Card -->
     <div class="bg-white rounded-xl shadow-sm border border-gray-200">
         <div class="p-6">
-            <form method="POST" action="{{ route('superadmin.pengawasan.tertib_usaha.store') }}">
+            <form method="POST" action="{{ route('superadmin.pengawasan.tertib_penyelenggara.store') }}">
                 @csrf
 
                 <!-- Section: Identitas Badan Usaha -->
@@ -270,7 +270,7 @@
 
                 <!-- Action Buttons -->
                 <div class="flex items-center justify-between pt-6 border-t">
-                    <a href="{{ route('superadmin.pengawasan.tertib_usaha.index') }}" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center space-x-2">
+                    <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.index') }}" class="px-6 py-2 bg-gray-200 text-gray-700 rounded-lg hover:bg-gray-300 transition-colors flex items-center space-x-2">
                         <i class="fas fa-arrow-left"></i>
                         <span>Kembali</span>
                     </a>

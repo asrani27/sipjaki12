@@ -12,6 +12,7 @@ use App\Http\Controllers\PortalController;
 use App\Http\Controllers\SuperadminController;
 use App\Http\Controllers\BeritaController;
 use App\Http\Controllers\TertibUsahaController;
+use App\Http\Controllers\Superadmin\TertibPenyelenggaraController;
 
 Route::get('/', [PortalController::class, 'welcome']);
 Route::get('/welcome2', [PortalController::class, 'welcome2']);
@@ -109,6 +110,12 @@ Route::middleware(['auth', '2fa'])->group(function () {
         Route::prefix('pengawasan')->name('pengawasan.')->group(function () {
             Route::resource('tertib_usaha', TertibUsahaController::class)->parameters([
                 'tertib_usaha' => 'tertib_usaha'
+            ]);
+            Route::post('tertib_usaha/import', [TertibUsahaController::class, 'import'])->name('tertib_usaha.import');
+            
+            // Tertib Penyelenggara Routes
+            Route::resource('tertib_penyelenggara', TertibPenyelenggaraController::class)->parameters([
+                'tertib_penyelenggara' => 'tertib_penyelenggara'
             ]);
         });
 

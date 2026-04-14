@@ -1,27 +1,20 @@
 @extends('layouts.app')
 
-@section('title', 'Kelola Tertib Usaha')
+@section('title', 'Kelola Tertib Penyelenggara')
 
 @section('content')
 <div class="p-6">
     <!-- Header Section -->
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Kelola Tertib Usaha</h1>
-            <p class="text-gray-600 mt-1">Kelola data pengawasan tertib usaha</p>
+            <h1 class="text-2xl font-bold text-gray-900">Kelola Tertib Penyelenggara</h1>
+            <p class="text-gray-600 mt-1">Kelola data pengawasan tertib penyelenggara</p>
         </div>
-        <div class="flex items-center gap-3">
-            <button onclick="openImportModal()"
-                class="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-                <i class="fas fa-file-import"></i>
-                <span>Import</span>
-            </button>
-            <a href="{{ route('superadmin.pengawasan.tertib_usaha.create') }}"
-                class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
-                <i class="fas fa-plus"></i>
-                <span>Tambah Data</span>
-            </a>
-        </div>
+        <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.create') }}"
+            class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
+            <i class="fas fa-plus"></i>
+            <span>Tambah Data</span>
+        </a>
     </div>
 
     <!-- Success Alert -->
@@ -46,7 +39,7 @@
 
     <!-- Search Form -->
     <div class="bg-white shadow-sm rounded-lg p-4 mb-6">
-        <form method="GET" action="{{ route('superadmin.pengawasan.tertib_usaha.index') }}" class="flex gap-4">
+        <form method="GET" action="{{ route('superadmin.pengawasan.tertib_penyelenggara.index') }}" class="flex gap-4">
             <div class="flex-1">
                 <input type="text" name="search" value="{{ request('search') }}"
                     placeholder="Cari nama badan usaha, NIB, SBU, atau nama paket..."
@@ -56,7 +49,7 @@
                 <i class="fas fa-search"></i>
             </button>
             @if(request('search'))
-            <a href="{{ route('superadmin.pengawasan.tertib_usaha.index') }}"
+            <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.index') }}"
                 class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
@@ -91,10 +84,10 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse($tertibUsaha as $item)
+                    @forelse($tertibPenyelenggara as $item)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {{ $tertibUsaha->firstItem() + $loop->index }}
+                            {{ $tertibPenyelenggara->firstItem() + $loop->index }}
                         </td>
                         <td class="px-4 py-4 text-sm text-gray-900">
                             {{ $item->nama_badan_usaha ?? '-' }}
@@ -110,15 +103,15 @@
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex items-center space-x-2">
-                                <a href="{{ route('superadmin.pengawasan.tertib_usaha.show', $item) }}"
+                                <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.show', $item) }}"
                                     class="text-blue-600 hover:text-blue-900 transition-colors" title="Detail">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ route('superadmin.pengawasan.tertib_usaha.edit', $item) }}"
+                                <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.edit', $item) }}"
                                     class="text-amber-600 hover:text-amber-900 transition-colors" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('superadmin.pengawasan.tertib_usaha.destroy', $item) }}" method="POST"
+                                <form action="{{ route('superadmin.pengawasan.tertib_penyelenggara.destroy', $item) }}" method="POST"
                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
                                     class="inline">
                                     @csrf
@@ -136,7 +129,7 @@
                         <td colspan="6" class="px-4 py-12 text-center">
                             <div class="text-gray-500">
                                 <i class="fas fa-inbox text-4xl mb-3 block"></i>
-                                <span class="text-lg">Tidak ada data Tertib Usaha</span>
+                                <span class="text-lg">Tidak ada data Tertib Penyelenggara</span>
                                 <p class="text-sm mt-1">Mulai dengan menambahkan data baru</p>
                             </div>
                         </td>
@@ -148,84 +141,10 @@
     </div>
 
     <!-- Pagination -->
-    @if($tertibUsaha->hasPages())
+    @if($tertibPenyelenggara->hasPages())
     <div class="mt-6 flex justify-center">
-        {{ $tertibUsaha->links() }}
+        {{ $tertibPenyelenggara->links() }}
     </div>
     @endif
 </div>
-
-<!-- Import Modal -->
-<div id="importModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
-    <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
-        <div class="flex justify-between items-center p-4 border-b">
-            <h3 class="text-lg font-semibold text-gray-900">Import Data Tertib Usaha</h3>
-            <button onclick="closeImportModal()" class="text-gray-400 hover:text-gray-600">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-        <form action="{{ route('superadmin.pengawasan.tertib_usaha.import') }}" method="POST" enctype="multipart/form-data" class="p-4">
-            @csrf
-            <div class="mb-4">
-                <label class="block text-sm font-medium text-gray-700 mb-2">File Excel</label>
-                <input type="file" name="file" accept=".xlsx,.xls,.csv" required
-                    class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500">
-                <p class="mt-1 text-sm text-gray-500">Format yang didukung: .xlsx, .xls, .csv</p>
-            </div>
-            <div class="bg-yellow-50 border border-yellow-200 rounded-lg p-3 mb-4">
-                <p class="text-sm text-yellow-800">
-                    <i class="fas fa-info-circle mr-1"></i>
-                    Import dimulai dari baris ke-2. Pastikan format file sesuai dengan template.
-                </p>
-            </div>
-            <div class="flex justify-end gap-3">
-                <button type="button" onclick="closeImportModal()"
-                    class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
-                    Batal
-                </button>
-                <button type="submit"
-                    class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition-colors">
-                    <i class="fas fa-upload mr-1"></i> Import
-                </button>
-            </div>
-        </form>
-    </div>
-</div>
-
-<!-- Error Alert for Import -->
-@if(session('error'))
-<div class="bg-red-50 border border-red-400 p-3 mb-6 rounded-lg shadow-md">
-    <div class="flex items-center">
-        <div class="flex-shrink-0">
-            <i class="fas fa-exclamation-circle text-red-400"></i>
-        </div>
-        <div class="ml-3">
-            <p class="text-sm text-red-700">{{ session('error') }}</p>
-        </div>
-        <div class="ml-auto">
-            <button onclick="this.parentElement.parentElement.parentElement.remove()"
-                class="text-red-400 hover:text-red-600">
-                <i class="fas fa-times"></i>
-            </button>
-        </div>
-    </div>
-</div>
-@endif
-
-<script>
-function openImportModal() {
-    document.getElementById('importModal').classList.remove('hidden');
-}
-
-function closeImportModal() {
-    document.getElementById('importModal').classList.add('hidden');
-}
-
-// Close modal on outside click
-document.getElementById('importModal').addEventListener('click', function(e) {
-    if (e.target === this) {
-        closeImportModal();
-    }
-});
-</script>
 @endsection

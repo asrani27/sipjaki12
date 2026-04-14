@@ -15,6 +15,10 @@ return new class extends Migration
             $table->id();
             $table->date('waktu_survey')->nullable();
             $table->string('nama_paket')->nullable();
+            $table->bigInteger('nilai_kontrak')->nullable();
+            $table->string('lama_pekerjaan')->nullable();
+            $table->date('tanggal_mulai_kontrak')->nullable();
+            $table->date('tanggal_berakhit_kontrak')->nullable();
             $table->string('no_nib')->nullable();
             $table->string('no_sbu')->nullable();
             $table->string('nama_badan_usaha')->nullable();

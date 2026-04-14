@@ -333,6 +333,58 @@
                             <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                             @enderror
                         </div>
+
+                        <!-- Nilai Kontrak -->
+                        <div>
+                            <label for="nilai_kontrak" class="block text-sm font-medium text-gray-700 mb-2">
+                                Nilai Kontrak
+                            </label>
+                            <input type="number" name="nilai_kontrak" id="nilai_kontrak"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                value="{{ old('nilai_kontrak', $tertibUsaha->nilai_kontrak) }}" placeholder="Masukkan nilai kontrak">
+                            @error('nilai_kontrak')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Lama Pekerjaan -->
+                        <div>
+                            <label for="lama_pekerjaan" class="block text-sm font-medium text-gray-700 mb-2">
+                                Lama Pekerjaan
+                            </label>
+                            <input type="text" name="lama_pekerjaan" id="lama_pekerjaan"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                value="{{ old('lama_pekerjaan', $tertibUsaha->lama_pekerjaan) }}" placeholder="Contoh: 120 Hari">
+                            @error('lama_pekerjaan')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Tanggal Mulai Kontrak -->
+                        <div>
+                            <label for="tanggal_mulai_kontrak" class="block text-sm font-medium text-gray-700 mb-2">
+                                Tanggal Mulai Kontrak
+                            </label>
+                            <input type="date" name="tanggal_mulai_kontrak" id="tanggal_mulai_kontrak"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                value="{{ old('tanggal_mulai_kontrak', $tertibUsaha->tanggal_mulai_kontrak) }}">
+                            @error('tanggal_mulai_kontrak')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
+
+                        <!-- Tanggal Berakhir Kontrak -->
+                        <div>
+                            <label for="tanggal_berakhit_kontrak" class="block text-sm font-medium text-gray-700 mb-2">
+                                Tanggal Berakhir Kontrak
+                            </label>
+                            <input type="date" name="tanggal_berakhit_kontrak" id="tanggal_berakhit_kontrak"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                                value="{{ old('tanggal_berakhit_kontrak', $tertibUsaha->tanggal_berakhit_kontrak) }}">
+                            @error('tanggal_berakhit_kontrak')
+                            <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                            @enderror
+                        </div>
                     </div>
                 </div>
 

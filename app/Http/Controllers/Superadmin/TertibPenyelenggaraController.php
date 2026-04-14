@@ -1,20 +1,19 @@
 <?php
 
-namespace App\Http\Controllers;
+namespace App\Http\Controllers\Superadmin;
 
-use App\Models\TertibUsaha;
-use App\Imports\TertibUsahaImport;
+use App\Http\Controllers\Controller;
+use App\Models\TertibPenyelenggara;
 use Illuminate\Http\Request;
-use Maatwebsite\Excel\Facades\Excel;
 
-class TertibUsahaController extends Controller
+class TertibPenyelenggaraController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $query = TertibUsaha::query();
+        $query = TertibPenyelenggara::query();
 
         // Search functionality
         if ($request->has('search') && $request->search) {
@@ -27,8 +26,8 @@ class TertibUsahaController extends Controller
             });
         }
 
-        $tertibUsaha = $query->latest()->paginate(10);
-        return view('superadmin.pengawasan.tertib_usaha.index', compact('tertibUsaha'));
+        $tertibPenyelenggara = $query->latest()->paginate(10);
+        return view('superadmin.pengawasan.tertib_penyelenggara.index', compact('tertibPenyelenggara'));
     }
 
     /**
@@ -36,7 +35,7 @@ class TertibUsahaController extends Controller
      */
     public function create()
     {
-        return view('superadmin.pengawasan.tertib_usaha.create');
+        return view('superadmin.pengawasan.tertib_penyelenggara.create');
     }
 
     /**
@@ -75,32 +74,32 @@ class TertibUsahaController extends Controller
             'instansi' => 'nullable|string|max:255',
         ]);
 
-        TertibUsaha::create($request->all());
+        TertibPenyelenggara::create($request->all());
 
-        return redirect()->route('superadmin.pengawasan.tertib_usaha.index')
-            ->with('success', 'Data Tertib Usaha berhasil ditambahkan.');
+        return redirect()->route('superadmin.pengawasan.tertib_penyelenggara.index')
+            ->with('success', 'Data Tertib Penyelenggara berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(TertibUsaha $tertibUsaha)
+    public function show(TertibPenyelenggara $tertibPenyelenggara)
     {
-        return view('superadmin.pengawasan.tertib_usaha.show', compact('tertibUsaha'));
+        return view('superadmin.pengawasan.tertib_penyelenggara.show', compact('tertibPenyelenggara'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TertibUsaha $tertibUsaha)
+    public function edit(TertibPenyelenggara $tertibPenyelenggara)
     {
-        return view('superadmin.pengawasan.tertib_usaha.edit', compact('tertibUsaha'));
+        return view('superadmin.pengawasan.tertib_penyelenggara.edit', compact('tertibPenyelenggara'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TertibUsaha $tertibUsaha)
+    public function update(Request $request, TertibPenyelenggara $tertibPenyelenggara)
     {
         $request->validate([
             'waktu_survey' => 'nullable|date',
@@ -133,41 +132,20 @@ class TertibUsahaController extends Controller
             'instansi' => 'nullable|string|max:255',
         ]);
 
-        $tertibUsaha->update($request->all());
+        $tertibPenyelenggara->update($request->all());
 
-        return redirect()->route('superadmin.pengawasan.tertib_usaha.index')
-            ->with('success', 'Data Tertib Usaha berhasil diperbarui.');
+        return redirect()->route('superadmin.pengawasan.tertib_penyelenggara.index')
+            ->with('success', 'Data Tertib Penyelenggara berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TertibUsaha $tertibUsaha)
+    public function destroy(TertibPenyelenggara $tertibPenyelenggara)
     {
-        $tertibUsaha->delete();
+        $tertibPenyelenggara->delete();
 
-        return redirect()->route('superadmin.pengawasan.tertib_usaha.index')
-            ->with('success', 'Data Tertib Usaha berhasil dihapus.');
-    }
-
-    /**
-     * Import data from Excel file.
-     */
-    public function import(Request $request)
-    {
-        $request->validate([
-            'file' => 'required|file|mimes:xlsx,xls,csv',
-        ]);
-
-        try {
-
-            Excel::import(new TertibUsahaImport, $request->file('file'));
-            
-            return redirect()->route('superadmin.pengawasan.tertib_usaha.index')
-                ->with('success', 'Data berhasil diimport.');
-        } catch (\Exception $e) {
-            return redirect()->route('superadmin.pengawasan.tertib_usaha.index')
-                ->with('error', 'Gagal import data: ' . $e->getMessage());
-        }
+        return redirect()->route('superadmin.pengawasan.tertib_penyelenggara.index')
+            ->with('success', 'Data Tertib Penyelenggara berhasil dihapus.');
     }
 }
