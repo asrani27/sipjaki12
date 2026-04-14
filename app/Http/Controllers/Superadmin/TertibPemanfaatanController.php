@@ -3,19 +3,19 @@
 namespace App\Http\Controllers\Superadmin;
 
 use App\Http\Controllers\Controller;
-use App\Models\TertibPenyelenggara;
-use App\Imports\TertibPenyelenggaraImport;
+use App\Models\TertibPemanfaatan;
+use App\Imports\TertibPemanfaatanImport;
 use Illuminate\Http\Request;
 use Maatwebsite\Excel\Facades\Excel;
 
-class TertibPenyelenggaraController extends Controller
+class TertibPemanfaatanController extends Controller
 {
     /**
      * Display a listing of the resource.
      */
     public function index(Request $request)
     {
-        $query = TertibPenyelenggara::query();
+        $query = TertibPemanfaatan::query();
 
         // Search functionality
         if ($request->has('search') && $request->search) {
@@ -28,8 +28,8 @@ class TertibPenyelenggaraController extends Controller
             });
         }
 
-        $tertibPenyelenggara = $query->latest()->paginate(10);
-        return view('superadmin.pengawasan.tertib_penyelenggara.index', compact('tertibPenyelenggara'));
+        $tertibPemanfaatan = $query->latest()->paginate(10);
+        return view('superadmin.pengawasan.tertib_pemanfaatan.index', compact('tertibPemanfaatan'));
     }
 
     /**
@@ -37,7 +37,7 @@ class TertibPenyelenggaraController extends Controller
      */
     public function create()
     {
-        return view('superadmin.pengawasan.tertib_penyelenggara.create');
+        return view('superadmin.pengawasan.tertib_pemanfaatan.create');
     }
 
     /**
@@ -76,32 +76,32 @@ class TertibPenyelenggaraController extends Controller
             'instansi' => 'nullable|string|max:255',
         ]);
 
-        TertibPenyelenggara::create($request->all());
+        TertibPemanfaatan::create($request->all());
 
-        return redirect()->route('superadmin.pengawasan.tertib_penyelenggara.index')
-            ->with('success', 'Data Tertib Penyelenggara berhasil ditambahkan.');
+        return redirect()->route('superadmin.pengawasan.tertib_pemanfaatan.index')
+            ->with('success', 'Data Tertib Pemanfaatan berhasil ditambahkan.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(TertibPenyelenggara $tertibPenyelenggara)
+    public function show(TertibPemanfaatan $tertibPemanfaatan)
     {
-        return view('superadmin.pengawasan.tertib_penyelenggara.show', compact('tertibPenyelenggara'));
+        return view('superadmin.pengawasan.tertib_pemanfaatan.show', compact('tertibPemanfaatan'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(TertibPenyelenggara $tertibPenyelenggara)
+    public function edit(TertibPemanfaatan $tertibPemanfaatan)
     {
-        return view('superadmin.pengawasan.tertib_penyelenggara.edit', compact('tertibPenyelenggara'));
+        return view('superadmin.pengawasan.tertib_pemanfaatan.edit', compact('tertibPemanfaatan'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, TertibPenyelenggara $tertibPenyelenggara)
+    public function update(Request $request, TertibPemanfaatan $tertibPemanfaatan)
     {
         $request->validate([
             'waktu_survey' => 'nullable|date',
@@ -134,21 +134,21 @@ class TertibPenyelenggaraController extends Controller
             'instansi' => 'nullable|string|max:255',
         ]);
 
-        $tertibPenyelenggara->update($request->all());
+        $tertibPemanfaatan->update($request->all());
 
-        return redirect()->route('superadmin.pengawasan.tertib_penyelenggara.index')
-            ->with('success', 'Data Tertib Penyelenggara berhasil diperbarui.');
+        return redirect()->route('superadmin.pengawasan.tertib_pemanfaatan.index')
+            ->with('success', 'Data Tertib Pemanfaatan berhasil diperbarui.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(TertibPenyelenggara $tertibPenyelenggara)
+    public function destroy(TertibPemanfaatan $tertibPemanfaatan)
     {
-        $tertibPenyelenggara->delete();
+        $tertibPemanfaatan->delete();
 
-        return redirect()->route('superadmin.pengawasan.tertib_penyelenggara.index')
-            ->with('success', 'Data Tertib Penyelenggara berhasil dihapus.');
+        return redirect()->route('superadmin.pengawasan.tertib_pemanfaatan.index')
+            ->with('success', 'Data Tertib Pemanfaatan berhasil dihapus.');
     }
 
     /**
@@ -161,13 +161,12 @@ class TertibPenyelenggaraController extends Controller
         ]);
 
         try {
-
-            Excel::import(new TertibPenyelenggaraImport, $request->file('file'));
+            Excel::import(new TertibPemanfaatanImport, $request->file('file'));
             
-            return redirect()->route('superadmin.pengawasan.tertib_penyelenggara.index')
+            return redirect()->route('superadmin.pengawasan.tertib_pemanfaatan.index')
                 ->with('success', 'Data berhasil diimport.');
         } catch (\Exception $e) {
-            return redirect()->route('superadmin.pengawasan.tertib_penyelenggara.index')
+            return redirect()->route('superadmin.pengawasan.tertib_pemanfaatan.index')
                 ->with('error', 'Gagal import data: ' . $e->getMessage());
         }
     }

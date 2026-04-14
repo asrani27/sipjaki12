@@ -122,7 +122,9 @@
                     <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.index') }}"
                         class="block px-4 py-2 text-sm {{ request()->routeIs('superadmin.pengawasan.tertib_penyelenggara.*') ? 'text-blue-600 font-medium' : 'text-gray-600' }} hover:text-gray-900">Tertib
                         Penyelenggara</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900">Tertib Pemanfaatan</a>
+                    <a href="{{ route('superadmin.pengawasan.tertib_pemanfaatan.index') }}"
+                        class="block px-4 py-2 text-sm {{ request()->routeIs('superadmin.pengawasan.tertib_pemanfaatan.*') ? 'text-blue-600 font-medium' : 'text-gray-600' }} hover:text-gray-900">Tertib
+                        Pemanfaatan</a>
                 </div>
             </div>
 

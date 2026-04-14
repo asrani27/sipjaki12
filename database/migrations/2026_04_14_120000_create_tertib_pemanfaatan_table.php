@@ -1,0 +1,55 @@
+<?php
+
+use Illuminate\Database\Migrations\Migration;
+use Illuminate\Database\Schema\Blueprint;
+use Illuminate\Support\Facades\Schema;
+
+return new class extends Migration
+{
+    /**
+     * Run the migrations.
+     */
+    public function up(): void
+    {
+        Schema::create('tertib_pemanfaatan', function (Blueprint $table) {
+            $table->id();
+            $table->date('waktu_survey')->nullable();
+            $table->string('nama_paket')->nullable();
+            $table->integer('nilai_kontrak')->nullable();
+            $table->string('lama_pekerjaan')->nullable();
+            $table->date('tanggal_mulai_kontrak')->nullable();
+            $table->date('tanggal_berakhit_kontrak')->nullable();
+            $table->string('no_nib')->nullable();
+            $table->string('no_sbu')->nullable();
+            $table->string('nama_badan_usaha')->nullable();
+            $table->string('nama_pimpinan')->nullable();
+            $table->text('alamat')->nullable();
+            $table->string('kab_kota')->nullable();
+            $table->string('provinsi')->nullable();
+            $table->string('no_telp')->nullable();
+            $table->string('email')->nullable();
+            $table->string('npwp')->nullable();
+            $table->string('jenis_usaha')->nullable();
+            $table->string('sifat_usaha')->nullable();
+            $table->string('no_reg_sbu')->nullable();
+            $table->date('masa_berlaku_sbu')->nullable();
+            $table->string('klasifikasi_usaha')->nullable();
+            $table->string('kualifikasi_usaha')->nullable();
+            $table->string('layanan_usaha')->nullable();
+            $table->string('url_file_nib', 500)->nullable();
+            $table->string('url_file_sbu', 500)->nullable();
+            $table->string('status_bpjs')->nullable();
+            $table->string('url_kwitansi', 500)->nullable();
+            $table->string('instansi')->nullable();
+            $table->timestamps();
+        });
+    }
+
+    /**
+     * Reverse the migrations.
+     */
+    public function down(): void
+    {
+        Schema::dropIfExists('tertib_pemanfaatan');
+    }
+};

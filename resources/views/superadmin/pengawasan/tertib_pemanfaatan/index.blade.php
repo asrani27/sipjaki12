@@ -1,14 +1,14 @@
 @extends('layouts.app')
 
-@section('title', 'Kelola Tertib Penyelenggara')
+@section('title', 'Kelola Tertib Pemanfaatan')
 
 @section('content')
 <div class="p-6">
     <!-- Header Section -->
     <div class="flex justify-between items-center mb-6">
         <div>
-            <h1 class="text-2xl font-bold text-gray-900">Kelola Tertib Penyelenggara</h1>
-            <p class="text-gray-600 mt-1">Kelola data pengawasan tertib penyelenggara</p>
+            <h1 class="text-2xl font-bold text-gray-900">Kelola Tertib Pemanfaatan</h1>
+            <p class="text-gray-600 mt-1">Kelola data pengawasan tertib pemanfaatan</p>
         </div>
         <div class="flex items-center gap-3">
             <button onclick="openImportModal()"
@@ -16,7 +16,7 @@
                 <i class="fas fa-file-import"></i>
                 <span>Import</span>
             </button>
-            <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.create') }}"
+            <a href="{{ route('superadmin.pengawasan.tertib_pemanfaatan.create') }}"
                 class="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg flex items-center gap-2 transition-colors">
                 <i class="fas fa-plus"></i>
                 <span>Tambah Data</span>
@@ -46,7 +46,7 @@
 
     <!-- Search Form -->
     <div class="bg-white shadow-sm rounded-lg p-4 mb-6">
-        <form method="GET" action="{{ route('superadmin.pengawasan.tertib_penyelenggara.index') }}" class="flex gap-4">
+        <form method="GET" action="{{ route('superadmin.pengawasan.tertib_pemanfaatan.index') }}" class="flex gap-4">
             <div class="flex-1">
                 <input type="text" name="search" value="{{ request('search') }}"
                     placeholder="Cari nama badan usaha, NIB, SBU, atau nama paket..."
@@ -56,7 +56,7 @@
                 <i class="fas fa-search"></i>
             </button>
             @if(request('search'))
-            <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.index') }}"
+            <a href="{{ route('superadmin.pengawasan.tertib_pemanfaatan.index') }}"
                 class="px-4 py-2 bg-gray-300 text-gray-700 rounded-lg hover:bg-gray-400 transition-colors">
                 <i class="fas fa-times"></i>
             </a>
@@ -91,10 +91,10 @@
                     </tr>
                 </thead>
                 <tbody class="bg-white divide-y divide-gray-200">
-                    @forelse($tertibPenyelenggara as $item)
+                    @forelse($tertibPemanfaatan as $item)
                     <tr class="hover:bg-gray-50 transition-colors">
                         <td class="px-4 py-4 whitespace-nowrap text-sm text-gray-900">
-                            {{ $tertibPenyelenggara->firstItem() + $loop->index }}
+                            {{ $tertibPemanfaatan->firstItem() + $loop->index }}
                         </td>
                         <td class="px-4 py-4 text-sm text-gray-900">
                             {{ $item->nama_badan_usaha ?? '-' }}
@@ -110,15 +110,15 @@
                         </td>
                         <td class="px-4 py-4 whitespace-nowrap text-sm font-medium">
                             <div class="flex items-center space-x-2">
-                                <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.show', $item) }}"
+                                <a href="{{ route('superadmin.pengawasan.tertib_pemanfaatan.show', $item) }}"
                                     class="text-blue-600 hover:text-blue-900 transition-colors" title="Detail">
                                     <i class="fas fa-eye"></i>
                                 </a>
-                                <a href="{{ route('superadmin.pengawasan.tertib_penyelenggara.edit', $item) }}"
+                                <a href="{{ route('superadmin.pengawasan.tertib_pemanfaatan.edit', $item) }}"
                                     class="text-amber-600 hover:text-amber-900 transition-colors" title="Edit">
                                     <i class="fas fa-edit"></i>
                                 </a>
-                                <form action="{{ route('superadmin.pengawasan.tertib_penyelenggara.destroy', $item) }}" method="POST"
+                                <form action="{{ route('superadmin.pengawasan.tertib_pemanfaatan.destroy', $item) }}" method="POST"
                                     onsubmit="return confirm('Apakah Anda yakin ingin menghapus data ini?')"
                                     class="inline">
                                     @csrf
@@ -136,7 +136,7 @@
                         <td colspan="6" class="px-4 py-12 text-center">
                             <div class="text-gray-500">
                                 <i class="fas fa-inbox text-4xl mb-3 block"></i>
-                                <span class="text-lg">Tidak ada data Tertib Penyelenggara</span>
+                                <span class="text-lg">Tidak ada data Tertib Pemanfaatan</span>
                                 <p class="text-sm mt-1">Mulai dengan menambahkan data baru</p>
                             </div>
                         </td>
@@ -148,9 +148,9 @@
     </div>
 
     <!-- Pagination -->
-    @if($tertibPenyelenggara->hasPages())
+    @if($tertibPemanfaatan->hasPages())
     <div class="mt-6 flex justify-center">
-        {{ $tertibPenyelenggara->links() }}
+        {{ $tertibPemanfaatan->links() }}
     </div>
     @endif
 </div>
@@ -159,12 +159,12 @@
 <div id="importModal" class="fixed inset-0 bg-black bg-opacity-50 hidden z-50 flex items-center justify-center">
     <div class="bg-white rounded-lg shadow-xl w-full max-w-md mx-4">
         <div class="flex justify-between items-center p-4 border-b">
-            <h3 class="text-lg font-semibold text-gray-900">Import Data Tertib Penyelenggara</h3>
+            <h3 class="text-lg font-semibold text-gray-900">Import Data Tertib Pemanfaatan</h3>
             <button onclick="closeImportModal()" class="text-gray-400 hover:text-gray-600">
                 <i class="fas fa-times"></i>
             </button>
         </div>
-        <form action="{{ route('superadmin.pengawasan.tertib_penyelenggara.import') }}" method="POST" enctype="multipart/form-data" class="p-4">
+        <form action="{{ route('superadmin.pengawasan.tertib_pemanfaatan.import') }}" method="POST" enctype="multipart/form-data" class="p-4">
             @csrf
             <div class="mb-4">
                 <label class="block text-sm font-medium text-gray-700 mb-2">File Excel</label>
