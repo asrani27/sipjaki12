@@ -11,6 +11,7 @@ use App\Http\Controllers\Auth\TwoFAController;
 use App\Http\Controllers\PortalController;
 use App\Http\Controllers\SuperadminController;
 use App\Http\Controllers\BeritaController;
+use App\Http\Controllers\TertibUsahaController;
 
 Route::get('/', [PortalController::class, 'welcome']);
 Route::get('/welcome2', [PortalController::class, 'welcome2']);
@@ -103,6 +104,13 @@ Route::middleware(['auth', '2fa'])->group(function () {
 
         // Potensi Pasar Routes
         Route::resource('potensi', PotensiController::class);
+
+        // Tertib Usaha Routes
+        Route::prefix('pengawasan')->name('pengawasan.')->group(function () {
+            Route::resource('tertib_usaha', TertibUsahaController::class)->parameters([
+                'tertib_usaha' => 'tertib_usaha'
+            ]);
+        });
 
         // Peraturan Routes
         Route::resource('peraturan', PeraturanController::class);

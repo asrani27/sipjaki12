@@ -100,9 +100,9 @@
             <!-- Pengawasan -->
             <div class="nav-item">
                 <button onclick="toggleSubmenu('pengawasan-submenu')"
-                    class="flex items-center justify-between w-full px-4 py-2 text-gray-600 rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
+                    class="flex items-center justify-between w-full px-4 py-2 {{ request()->routeIs('superadmin.pengawasan.tertib_usaha.*') ? 'text-blue-600 bg-blue-50 border-l-4 border-blue-600' : 'text-gray-600' }} rounded-lg hover:bg-gray-50 hover:text-gray-900 transition-colors">
                     <span class="flex items-center space-x-3">
-                        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <svg class="w-5 h-5 {{ request()->routeIs('superadmin.pengawasan.tertib_usaha.*') ? 'text-blue-600' : 'text-gray-500' }}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
@@ -110,13 +110,15 @@
                         </svg>
                         <span>Pengawasan</span>
                     </span>
-                    <svg id="pengawasan-arrow" class="w-4 h-4 arrow-icon" fill="none" stroke="currentColor"
+                    <svg id="pengawasan-arrow" class="w-4 h-4 arrow-icon {{ request()->routeIs('superadmin.pengawasan.tertib_usaha.*') ? 'rotate' : '' }}" fill="none" stroke="currentColor"
                         viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
                     </svg>
                 </button>
                 <div id="pengawasan-submenu" class="submenu pl-12 space-y-1">
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900">Tertib Usaha</a>
+                    <a href="{{ route('superadmin.pengawasan.tertib_usaha.index') }}"
+                        class="block px-4 py-2 text-sm {{ request()->routeIs('superadmin.pengawasan.tertib_usaha.index') ? 'text-blue-600 font-medium' : 'text-gray-600' }} hover:text-gray-900">Tertib
+                        Usaha</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900">Tertib
                         Penyelenggara</a>
                     <a href="#" class="block px-4 py-2 text-sm text-gray-600 hover:text-gray-900">Tertib Pemanfaatan</a>
