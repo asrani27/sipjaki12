@@ -6,7 +6,7 @@ use App\Models\Profil;
 use App\Models\Berita;
 use App\Models\Agenda;
 use App\Models\Peraturan;
-use Illuminate\Http\Request;
+use App\Models\TertibUsaha;
 use Illuminate\Support\Facades\Storage;
 
 class PortalController extends Controller
@@ -24,21 +24,6 @@ class PortalController extends Controller
     {
         $berita = Berita::latest()->take(4)->get();
         return view('welcome2', compact('berita'));
-    }
-    /**
-     * Display the beranda page.
-     */
-    public function beranda()
-    {
-        return view('portal.beranda');
-    }
-
-    /**
-     * Display the profil page.
-     */
-    public function profil()
-    {
-        return view('portal.profil');
     }
 
     /**
@@ -128,27 +113,30 @@ class PortalController extends Controller
     }
 
     /**
-     * Display the tertib usaha page.
+     * Display the Tertib Usaha page.
      */
-    public function tertibUsaha()
+    public function TertibUsaha()
     {
-        return view('portal.tertib-usaha');
+        $tertibUsaha = TertibUsaha::latest()->get();
+        return view('portal.tertib-usaha', compact('tertibUsaha'));
     }
 
     /**
-     * Display the tertib penyelenggara page.
+     * Display the Tertib Penyelenggara page.
      */
-    public function tertibPenyelenggara()
+    public function TertibPenyelenggara()
     {
-        return view('portal.tertib-penyelenggara');
+        $tertibPenyelenggara = \App\Models\TertibPenyelenggara::latest()->get();
+        return view('portal.tertib-penyelenggara', compact('tertibPenyelenggara'));
     }
 
     /**
-     * Display the tertib pemanfaatan page.
+     * Display the Tertib Pemanfaatan page.
      */
-    public function tertibPemanfaatan()
+    public function TertibPemanfaatan()
     {
-        return view('portal.tertib-pemanfaatan');
+        $tertibPemanfaatan = \App\Models\TertibPemanfaatan::latest()->get();
+        return view('portal.tertib-pemanfaatan', compact('tertibPemanfaatan'));
     }
 
     /**
