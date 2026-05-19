@@ -351,8 +351,8 @@
                         </div>
                     </div>
 
-                    <!-- Text Brand -->
-                    <div class="text-left">
+                    <!-- Text Brand - Hide on mobile -->
+                    <div class="hidden lg:block text-left">
                         <h1 class="sipjaki-title text-3xl lg:text-4xl">Sistem Informasi Pembina Jasa Konstruksi</h1>
                         <p class="sipjaki-subtitle text-sm lg:text-base mt-2">DINAS PUPR KOTA BANJARMASIN</p>
                     </div>
