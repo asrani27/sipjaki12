@@ -253,7 +253,8 @@
                     <select name="status" id="status"
                         class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
                         required>
-                        <option value="publik" {{ old('status', $peraturan->status)=='publik' ? 'selected' : '' }}>Publik
+                        <option value="publik" {{ old('status', $peraturan->status)=='publik' ? 'selected' : ''
+                            }}>Publik
                         </option>
                         <option value="private" {{ old('status', $peraturan->status)=='private' ? 'selected' : '' }}>
                             Private</option>
@@ -325,7 +326,7 @@
                         <button type="submit" id="submitBtn"
                             class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
                             <i class="fas fa-save"></i>
-                            <span>Simpan</span>
+                            <span>Update</span>
                         </button>
                     </div>
                 </div>

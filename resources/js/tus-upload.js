@@ -173,10 +173,15 @@ export function initTusUpload() {
         upload.start();
     }
 
-    // Form submission validation
+    // Form submission validation - only require file on create page, not edit
     if (peraturanForm) {
         peraturanForm.addEventListener('submit', function(e) {
-            if (!filePathInput.value) {
+            // Check if we're on edit page (has existing file or file_path has value)
+            const isEditPage = uploadArea.closest('form').action.includes('/edit/') || 
+                               uploadArea.closest('form').querySelector('input[name="_method"]')?.value === 'PUT';
+            
+            // Only validate file upload on create page, not edit
+            if (!isEditPage && !filePathInput.value) {
                 e.preventDefault();
                 alert('Silakan upload file terlebih dahulu.');
                 return;
