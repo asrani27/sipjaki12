@@ -411,7 +411,7 @@
                         <div class="dropdown-menu">
                             <a href="{{ route('struktur-organisasi') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M13 6a3 3 0 11-6 0 3 3 0 016 0zM18 8a2 2 0 11-4 0 2 2 0 014 0zM14 15a4 4 0 00-8 0v3h8v-3zM6 8a2 2 0 11-4 0 2 2 0 014 0zM16 18v-3a5.972 5.972 0 00-.75-2.906A3.005 3.005 0 0119 15v3h-3zM4.75 12.094A5.973 5.973 0 004 15v3H1v-3a3 3 0 013.75-2.906z" />
                                     </svg>
@@ -420,7 +420,7 @@
                             </a>
                             <a href="{{ route('renstra') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
                                             clip-rule="evenodd" />
@@ -430,7 +430,7 @@
                             </a>
                             <a href="{{ route('tupoksi') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M4 4a2 2 0 012-2h8a2 2 0 012 2v12a2 2 0 01-2 2H6a2 2 0 01-2-2V4zm3 1h6v4H7V5zm6 6H7v2h6v-2z"
                                             clip-rule="evenodd" />
@@ -458,7 +458,7 @@
                         <div class="dropdown-menu">
                             <a href="{{ route('berita') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                             clip-rule="evenodd" />
@@ -468,7 +468,7 @@
                             </a>
                             <a href="{{ route('agenda') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M2 6a2 2 0 012-2h5l2 2h5a2 2 0 012 2v6a2 2 0 01-2 2H4a2 2 0 01-2-2V6z" />
                                     </svg>
@@ -495,7 +495,7 @@
                         <div class="dropdown-menu">
                             <a href="{{ route('pelatihan') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
                                             clip-rule="evenodd" />
@@ -505,7 +505,7 @@
                             </a>
                             <a href="{{ route('sertifikasi') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
                                             clip-rule="evenodd" />
@@ -515,7 +515,7 @@
                             </a>
                             <a href="{{ route('bimtek') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M9 4.804A7.968 7.968 0 005.5 4c-1.255 0-2.443.29-3.5.804v10A7.969 7.969 0 015.5 14c1.669 0 3.218.51 4.5 1.385A7.962 7.962 0 0114.5 14c1.255 0 2.443.29 3.5.804v-10A7.968 7.968 0 0014.5 4c-1.255 0-2.443.29-3.5.804V12a1 1 0 11-2 0V4.804z" />
                                     </svg>
@@ -544,7 +544,7 @@
                         <div class="dropdown-menu">
                             <a href="{{ route('tertib-usaha') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M2 5a2 2 0 012-2h12a2 2 0 012 2v10a2 2 0 01-2 2H4a2 2 0 01-2-2V5zm3.293 1.293a1 1 0 011.414 0l3 3a1 1 0 010 1.414l-3 3a1 1 0 01-1.414-1.414L7.586 10 5.293 7.707a1 1 0 010-1.414zM11 12a1 1 0 100 2h3a1 1 0 100-2h-3z"
                                             clip-rule="evenodd" />
@@ -554,7 +554,7 @@
                             </a>
                             <a href="{{ route('tertib-penyelenggara') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V4a2 2 0 00-2-2H6zm1 2a1 1 0 000 2h6a1 1 0 100-2H7zm0 4a1 1 0 000 2h6a1 1 0 100-2H7zm0 4a1 1 0 000 2h2a1 1 0 100-2H7z"
                                             clip-rule="evenodd" />
@@ -564,7 +564,7 @@
                             </a>
                             <a href="{{ route('tertib-pemanfaatan') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path
                                             d="M10.394 2.08a1 1 0 00-.788 0l-7 3a1 1 0 000 1.84L5.25 8.051a.999.999 0 01.356-.257l4-1.714a1 1 0 11.788 1.838L7.667 9.088l1.94.831a1 1 0 00.787 0l7-3a1 1 0 000-1.838l-7-3zM8.5 12.5l1.5-1.5 1.5 1.5-1.5 1.5-1.5-1.5z" />
                                     </svg>
@@ -591,7 +591,7 @@
                         <div class="dropdown-menu">
                             <a href="{{ route('ska-skt') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M6 6V5a3 3 0 013-3h2a3 3 0 013 3v1h2a2 2 0 012 2v3.57A22.952 22.952 0 0110 13a22.95 22.95 0 01-8-1.43V8a2 2 0 012-2h2zm2-1a1 1 0 011-1h2a1 1 0 011 1v1H8V5zm1 5a1 1 0 011-1h.01a1 1 0 110 2H10a1 1 0 01-1-1z"
                                             clip-rule="evenodd" />
@@ -601,7 +601,7 @@
                             </a>
                             <a href="{{ route('penanggung-jawab-teknik') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                             clip-rule="evenodd" />
@@ -641,7 +641,7 @@
                         <div class="dropdown-menu">
                             <a href="{{ route('spm-informasi') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
                                             clip-rule="evenodd" />
@@ -651,7 +651,7 @@
                             </a>
                             <a href="{{ route('spm-laporan') }}" class="dropdown-item">
                                 <div class="flex items-center space-x-3">
-                                    <svg class="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
+                                    <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
                                         <path fill-rule="evenodd"
                                             d="M6 2a2 2 0 00-2 2v12a2 2 0 002 2h8a2 2 0 002-2V7.414A2 2 0 0015.414 6L12 2.586A2 2 0 0010.586 2H6zm2 2a1 1 0 00-1 1v1a1 1 0 002 0V5a1 1 0 00-1-1zm0 4a1 1 0 100 2h4a1 1 0 100-2H8zm0 4a1 1 0 100 2h4a1 1 0 100-2H8z"
                                             clip-rule="evenodd" />
