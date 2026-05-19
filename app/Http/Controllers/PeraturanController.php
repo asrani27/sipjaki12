@@ -244,6 +244,7 @@ class PeraturanController extends Controller
             'file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
             'file_path' => 'nullable|string',
             'kategori' => 'required|in:UNDANG-UNDANG,PERATURAN PEMERINTAH,PERATURAN PRESIDEN,PERATURAN MENTERI,KEPUTUSAN MENTERI,SURAT EDARAN MENTERI,REFERENSI,PERATURAN DAERAH,PERATURAN GUBERNUR,PERATURAN WALIKOTA,SURAT KEPUTUSAN',
+            'status' => 'required|in:publik,private',
         ]);
 
         $data = $request->except(['file', 'file_path']);
@@ -298,6 +299,7 @@ class PeraturanController extends Controller
             'judul' => 'required|string|max:255',
             'file' => 'nullable|file|mimes:pdf,doc,docx|max:10240',
             'kategori' => 'required|in:UNDANG-UNDANG,PERATURAN PEMERINTAH,PERATURAN PRESIDEN,PERATURAN MENTERI,KEPUTUSAN MENTERI,SURAT EDARAN MENTERI,REFERENSI,PERATURAN DAERAH,PERATURAN GUBERNUR,PERATURAN WALIKOTA,SURAT KEPUTUSAN',
+            'status' => 'required|in:publik,private',
         ]);
 
         $data = $request->except('file');

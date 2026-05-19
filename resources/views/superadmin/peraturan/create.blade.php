@@ -242,6 +242,25 @@
                     @enderror
                 </div>
 
+                <!-- Status -->
+                <div class="mb-6">
+                    <label for="status" class="block text-sm font-medium text-gray-700 mb-2">
+                        Status <span class="text-red-500">*</span>
+                    </label>
+                    <select name="status" id="status"
+                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                        required>
+                        <option value="publik" {{ old('status', 'publik')=='publik' ? 'selected' : '' }}>Publik
+                        </option>
+                        <option value="private" {{ old('status')=='private' ? 'selected' : '' }}>Private</option>
+                    </select>
+                    <p class="mt-2 text-sm text-gray-500">Publik = tampil di halaman peraturan, Private = tidak
+                        tampil</p>
+                    @error('status')
+                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                    @enderror
+                </div>
+
                 <!-- File Upload with TUS -->
                 <div class="mb-6">
                     <label class="block text-sm font-medium text-gray-700 mb-2">
