@@ -25,7 +25,7 @@
             Sistem Informasi Pembina Jasa Konstruksi Dinas PUPR Kota Banjarmasin
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-4">
-            <button
+            {{-- <button
                 class="bg-white/20 backdrop-blur-sm text-white px-8 py-3 rounded-full hover:bg-white/30 transition-all duration-300 transform hover:scale-105 border border-white/30">
                 <span class="flex items-center gap-2">
                     <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
@@ -39,7 +39,7 @@
             <button
                 class="bg-white/90 text-blue-600 px-8 py-3 rounded-full hover:bg-white transition-all duration-300 transform hover:scale-105 font-semibold">
                 Pelajari Lebih Lanjut
-            </button>
+            </button> --}}
         </div>
     </div>
 </div>
@@ -129,7 +129,8 @@
     <!-- Grid Kanan - Card Informasi dengan Gradasi -->
     <div class="space-y-6">
         <!-- Card Pengumuman dengan Gradasi Biru -->
-        <div class="rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
+        {{-- <div
+            class="rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
             style="background: linear-gradient(135deg, rgb(51, 95, 185) 0%, rgb(103, 126, 234) 100%);">
             <div class="p-6 text-white">
                 <div class="flex items-center mb-4">
@@ -144,37 +145,38 @@
                     <h3 class="text-xl font-bold text-white">Pengumuman Penting</h3>
                 </div>
                 @if($pengumuman)
-                    <p class="text-white/90 mb-4 leading-relaxed">
-                        {{ \Illuminate\Support\Str::limit($pengumuman->judul ?? $pengumuman->isi ?? $pengumuman->konten ?? $pengumuman->deskripsi ?? 'Pengumuman', 100) }}
-                    </p>
-                    <a href="#"
-                        class="inline-flex items-center text-white font-semibold hover:text-yellow-300 transition-colors duration-300">
-                        Baca selengkapnya
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </a>
+                <p class="text-white/90 mb-4 leading-relaxed">
+                    {{ \Illuminate\Support\Str::limit($pengumuman->judul ?? $pengumuman->isi ?? $pengumuman->konten ??
+                    $pengumuman->deskripsi ?? 'Pengumuman', 100) }}
+                </p>
+                <a href="#"
+                    class="inline-flex items-center text-white font-semibold hover:text-yellow-300 transition-colors duration-300">
+                    Baca selengkapnya
+                    <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
                 @else
-                    <p class="text-white/90 mb-4 leading-relaxed">Pembukaan pendaftaran mahasiswa baru tahun ajaran
-                        2025/2026 akan dimulai pada tanggal 1 Januari 2025.</p>
-                    <a href="#"
-                        class="inline-flex items-center text-white font-semibold hover:text-yellow-300 transition-colors duration-300">
-                        Baca selengkapnya
-                        <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd"
-                                d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
-                                clip-rule="evenodd" />
-                        </svg>
-                    </a>
+                <p class="text-white/90 mb-4 leading-relaxed">Pembukaan pendaftaran mahasiswa baru tahun ajaran
+                    2025/2026 akan dimulai pada tanggal 1 Januari 2025.</p>
+                <a href="#"
+                    class="inline-flex items-center text-white font-semibold hover:text-yellow-300 transition-colors duration-300">
+                    Baca selengkapnya
+                    <svg class="w-4 h-4 ml-1" fill="currentColor" viewBox="0 0 20 20">
+                        <path fill-rule="evenodd"
+                            d="M10.293 3.293a1 1 0 011.414 0l6 6a1 1 0 010 1.414l-6 6a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-4.293-4.293a1 1 0 010-1.414z"
+                            clip-rule="evenodd" />
+                    </svg>
+                </a>
                 @endif
             </div>
-        </div>
+        </div> --}}
 
         <!-- Card Agenda dengan Gradasi Orange -->
         <div class="rounded-2xl shadow-xl overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-1"
-            style="background: linear-gradient(135deg, rgb(242, 143, 7) 0%, rgb(251, 191, 36) 100%);">
+            style="background: linear-gradient(135deg, rgb(51, 95, 185) 0%, rgb(103, 126, 234) 100%);">
             <div class="p-6 text-white">
                 <div class="flex items-center mb-4">
                     <div
@@ -189,18 +191,18 @@
                     <h3 class="text-xl font-bold text-white">Agenda Kegiatan</h3>
                 </div>
                 <ul class="space-y-3 text-white/90">
+                    @forelse($agenda as $item)
                     <li class="flex items-center">
                         <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                        <span class="font-medium">15 Des: Seminar Nasional</span>
+                        <span class="font-medium">{{ \Carbon\Carbon::parse($item->tanggal)->format('d M') }}: {{
+                            $item->acara }}</span>
                     </li>
+                    @empty
                     <li class="flex items-center">
                         <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                        <span class="font-medium">20 Des: Wisuda Periode Desember</span>
+                        <span class="font-medium">Tidak ada agenda</span>
                     </li>
-                    <li class="flex items-center">
-                        <span class="w-2 h-2 bg-white rounded-full mr-3"></span>
-                        <span class="font-medium">25 Des: Libur Semester</span>
-                    </li>
+                    @endforelse
                 </ul>
             </div>
         </div>

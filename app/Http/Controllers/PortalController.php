@@ -18,7 +18,8 @@ class PortalController extends Controller
     {
         $berita = Berita::latest()->take(4)->get();
         $pengumuman = \App\Models\Pengumuman::latest()->first();
-        return view('welcome', compact('berita', 'pengumuman'));
+        $agenda = Agenda::latest()->take(3)->get();
+        return view('welcome', compact('berita', 'pengumuman', 'agenda'));
     }
     public function welcome2()
     {
