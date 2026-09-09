@@ -73,7 +73,7 @@
                         
                         @foreach($slides as $index => $slide)
                             <div class="slide absolute inset-0 transition-opacity duration-500 {{ $index == 0 ? '' : 'opacity-0' }}" data-slide="{{ $index }}">
-                                <img src="{{ $slide->file ? Storage::disk('s3')->url($slide->file) : ($slide->default_image ?? 'https://picsum.photos/seed/slide' . ($index + 1) . '/800/400.jpg') }}"
+                                <img src="{{ $slide->file ? Storage::disk('public')->url($slide->file) : ($slide->default_image ?? 'https://picsum.photos/seed/slide' . ($index + 1) . '/800/400.jpg') }}"
                                      alt="Slide {{ $index + 1 }}" class="w-full h-full object-cover">
                                 <div class="absolute bottom-0 left-0 right-0 p-6" 
                                      style="background: linear-gradient(to top, rgba(51, 95, 185, 0.9), rgba(242, 143, 7, 0.7), transparent);">
@@ -191,19 +191,12 @@
                 <div class="group bg-white rounded-2xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2">
                     <div class="h-48 overflow-hidden relative">
                         @if($item->gambar)
-                            <img src="{{ Storage::disk('s3')->url('sipjaki/' . $item->gambar) }}" 
-                                 alt="{{ $item->judul }}" 
+                            <img src="{{ Storage::disk('public')->url('sipjaki/' . $item->gambar) }}"
+                                 alt="{{ $item->judul }}"
                                  class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500">
                         @else
-                            <div class="w-full h-full flex items-center justify-center" 
-                                 style="background: linear-gradient(135deg, rgb(51, 95, 185) 0%, rgb(103, 126, 234) 50%, rgb(242, 143, 7) 100%);">
-                                <svg class="w-16 h-16 text-white" fill="currentColor" viewBox="0 0 20 20">
-                                    <path d="M9 2a1 1 0 000 2h2a1 1 0 100-2H9z" />
-                                    <path fill-rule="evenodd"
-                                        d="M4 5a2 2 0 012-2 1 1 0 000 2H6a2 2 0 00-2 2v6a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-1a1 1 0 100-2h1a4 4 0 014 4v6a4 4 0 01-4 4H6a4 4 0 01-4-4V7a4 4 0 014-4z"
-                                        clip-rule="evenodd" />
-                                </svg>
-                            </div>
+                            <img src="{{ asset('images/fallbacks/no-image.svg') }}" alt="Tidak ada gambar"
+                                 class="w-full h-full object-cover">
                         @endif
                         <!-- Gradasi Overlay -->
                         <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>

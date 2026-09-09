@@ -43,7 +43,7 @@ class BeritaController extends Controller
         if ($request->hasFile('gambar')) {
             $gambar = $request->file('gambar');
             $namaGambar =  'berita-' . uniqid() . '.' . $gambar->getClientOriginalExtension();
-            $path = Storage::disk('s3')->putFileAs('sipjaki', $gambar, $namaGambar);
+            $path = Storage::disk('public')->putFileAs('sipjaki', $gambar, $namaGambar);
             $data['gambar'] = basename($path);
         }
 
@@ -76,15 +76,15 @@ class BeritaController extends Controller
         $data['slug'] = Str::slug($request->judul);
 
         if ($request->hasFile('gambar')) {
-            // Hapus gambar lama dari S3
+            // Hapus gambar lama dari storage
             if ($berita->gambar) {
-                Storage::disk('s3')->delete('sipjaki/' . $berita->gambar);
+                Storage::disk('public')->delete('sipjaki/' . $berita->gambar);
             }
 
-            // Upload gambar baru ke S3
+            // Upload gambar baru ke storage
             $gambar = $request->file('gambar');
             $namaGambar = 'berita-' . uniqid() . '.' . $gambar->getClientOriginalExtension();
-            $path = Storage::disk('s3')->putFileAs('sipjaki', $gambar, $namaGambar);
+            $path = Storage::disk('public')->putFileAs('sipjaki', $gambar, $namaGambar);
             $data['gambar'] = basename($path);
         }
 
@@ -108,9 +108,9 @@ class BeritaController extends Controller
      */
     public function destroy(Berita $berita)
     {
-        // Hapus gambar dari S3 jika ada
+        // Hapus gambar dari storage jika ada
         if ($berita->gambar) {
-            Storage::disk('s3')->delete('sipjaki/' . $berita->gambar);
+            Storage::disk('public')->delete('sipjaki/' . $berita->gambar);
         }
 
         $berita->delete();

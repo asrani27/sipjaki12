@@ -80,7 +80,7 @@
                             @if($berita->gambar)
                             <div class="mt-3">
                                 <p class="text-sm text-gray-600 mb-2">Gambar Saat Ini:</p>
-                                <img src="{{ Storage::disk('s3')->url('sipjaki/' . $berita->gambar) }}"
+                                <img src="{{ Storage::disk('public')->url('sipjaki/' . $berita->gambar) }}"
                                     alt="{{ $berita->judul }}" class="w-full h-48 object-cover rounded-lg shadow-sm">
                             </div>
                             @endif
@@ -94,12 +94,13 @@
                             <div class="p-4 text-center">
                                 <div id="imagePreview" class="text-gray-400">
                                     @if($berita->gambar)
-                                    <img src="{{ Storage::disk('s3')->url('sipjaki/' . $berita->gambar) }}" alt="Current"
+                                    <img src="{{ Storage::disk('public')->url('sipjaki/' . $berita->gambar) }}" alt="Current"
                                         class="w-full h-48 object-cover rounded-lg shadow-sm">
                                     <p class="mt-2 text-sm text-gray-500">Gambar saat ini (atau preview gambar baru)</p>
                                     @else
-                                    <i class="fas fa-image text-4xl mb-2 block"></i>
-                                    <p class="text-sm">Belum ada gambar</p>
+                                    <img src="{{ asset('images/fallbacks/no-image.svg') }}" alt="Tidak ada gambar"
+                                        class="w-full h-48 object-cover rounded-lg shadow-sm">
+                                    <p class="mt-2 text-sm text-gray-500">Belum ada gambar</p>
                                     @endif
                                 </div>
                             </div>
@@ -155,14 +156,15 @@ window.previewImage = function(input) {
         // Reset to original image
         @if($berita->gambar)
             preview.innerHTML = `
-                <img src="{{ Storage::disk('s3')->url('sipjaki/' . $berita->gambar) }}" alt="Current" 
+                <img src="{{ Storage::disk('public')->url('sipjaki/' . $berita->gambar) }}" alt="Current"
                      class="w-full h-48 object-cover rounded-lg shadow-sm">
                 <p class="mt-2 text-sm text-gray-500">Gambar saat ini (atau preview gambar baru)</p>
             `;
         @else
             preview.innerHTML = `
-                <i class="fas fa-image text-4xl mb-2 block"></i>
-                <p class="text-sm">Belum ada gambar</p>
+                <img src="{{ asset('images/fallbacks/no-image.svg') }}" alt="Tidak ada gambar"
+                     class="w-full h-48 object-cover rounded-lg shadow-sm">
+                <p class="mt-2 text-sm">Belum ada gambar</p>
             `;
         @endif
     }

@@ -68,12 +68,11 @@
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap">
                             @if($item->gambar)
-                            <img src="{{ Storage::disk('s3')->url('sipjaki/' . $item->gambar) }}"
+                            <img src="{{ Storage::disk('public')->url('sipjaki/' . $item->gambar) }}"
                                 alt="{{ $item->judul }}" class="h-16 w-24 object-cover rounded-lg shadow-sm">
                             @else
-                            <div class="h-16 w-24 bg-gray-200 rounded-lg flex items-center justify-center">
-                                <i class="fas fa-image text-gray-400"></i>
-                            </div>
+                            <img src="{{ asset('images/fallbacks/no-image.svg') }}" alt="Tidak ada gambar"
+                                class="h-16 w-24 object-cover rounded-lg shadow-sm">
                             @endif
                         </td>
                         <td class="px-6 py-4">

@@ -1,0 +1,34 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 300" preserveAspectRatio="xMidYMid meet" role="img" aria-label="Tidak ada gambar">
+  <defs>
+    <linearGradient id="bgGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#335FB9"/>
+      <stop offset="50%" stop-color="#677EEA"/>
+      <stop offset="100%" stop-color="#F28F07"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background gradient -->
+  <rect width="400" height="300" fill="url(#bgGrad)"/>
+
+  <!-- Decorative circles -->
+  <g opacity="0.1" fill="#FFFFFF">
+    <circle cx="60" cy="60" r="50"/>
+    <circle cx="340" cy="240" r="70"/>
+    <circle cx="330" cy="50" r="25"/>
+    <circle cx="80" cy="260" r="35"/>
+  </g>
+
+  <!-- Image icon (frame + sun + mountains) -->
+  <g transform="translate(200, 135)">
+    <rect x="-70" y="-55" width="140" height="110" rx="10"
+          fill="none" stroke="#FFFFFF" stroke-width="4" opacity="0.95"/>
+    <circle cx="-34" cy="-22" r="11" fill="#FFFFFF" opacity="0.95"/>
+    <path d="M -70 55 L -24 6 L 0 32 L 32 0 L 70 55 Z" fill="#FFFFFF" opacity="0.95"/>
+  </g>
+
+  <!-- Text label -->
+  <text x="200" y="232" text-anchor="middle"
+        font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif"
+        font-size="20" font-weight="600"
+        fill="#FFFFFF" opacity="0.95">Tidak Ada Gambar</text>
+</svg>

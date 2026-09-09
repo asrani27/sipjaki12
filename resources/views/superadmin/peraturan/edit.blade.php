@@ -274,7 +274,7 @@
 
                     @if($peraturan->file)
                     <p class="mb-3 text-sm text-gray-600">
-                        File saat ini: <a href="{{ Storage::disk('s3')->url('sipjaki/' . $peraturan->file) }}"
+                        File saat ini: <a href="{{ Storage::disk('public')->url('sipjaki/' . $peraturan->file) }}"
                             target="_blank" class="text-blue-600 hover:text-blue-900">{{ $peraturan->file }}</a>
                     </p>
                     @endif

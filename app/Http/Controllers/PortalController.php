@@ -228,14 +228,14 @@ class PortalController extends Controller
 
         $filePath = 'sipjaki/' . $peraturan->file;
 
-        if (!Storage::disk('s3')->exists($filePath)) {
+        if (!Storage::disk('public')->exists($filePath)) {
             return response()->json([
                 'success' => false,
                 'message' => 'File tidak ditemukan di storage'
             ], 404);
         }
 
-        $file = Storage::disk('s3')->get($filePath);
+        $file = Storage::disk('public')->get($filePath);
 
         // Determine mime type based on file extension
         $extension = pathinfo($peraturan->file, PATHINFO_EXTENSION);

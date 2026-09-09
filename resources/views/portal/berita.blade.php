@@ -41,15 +41,13 @@
                     <td class="px-6 py-4 whitespace-nowrap">
                         @if($item->gambar)
                         <a href="{{ route('berita.show', $item->slug) }}" class="block">
-                            <img src="{{ Storage::disk('s3')->url('sipjaki/' . $item->gambar) }}" alt="{{ $item->judul }}"
+                            <img src="{{ Storage::disk('public')->url('sipjaki/' . $item->gambar) }}" alt="{{ $item->judul }}"
                                 class="w-16 h-16 object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         </a>
                         @else
                         <a href="{{ route('berita.show', $item->slug) }}" class="block">
-                            <div
-                                class="w-16 h-16 bg-gray-200 rounded-lg flex items-center justify-center hover:bg-gray-300 transition-colors">
-                                <i class="fas fa-image text-gray-400 text-xl"></i>
-                            </div>
+                            <img src="{{ asset('images/fallbacks/no-image.svg') }}" alt="Tidak ada gambar"
+                                class="w-16 h-16 object-cover rounded-lg shadow-sm hover:shadow-md transition-shadow">
                         </a>
                         @endif
                     </td>

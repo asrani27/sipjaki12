@@ -91,8 +91,9 @@
                             </div>
                             <div class="p-4 text-center">
                                 <div id="imagePreview" class="text-gray-400">
-                                    <i class="fas fa-image text-4xl mb-2 block"></i>
-                                    <p class="text-sm">Belum ada gambar</p>
+                                    <img src="{{ asset('images/fallbacks/no-image.svg') }}" alt="Tidak ada gambar"
+                                        class="w-full h-48 object-cover rounded-lg shadow-sm">
+                                    <p class="mt-2 text-sm">Belum ada gambar</p>
                                 </div>
                             </div>
                         </div>
@@ -145,8 +146,9 @@ window.previewImage = function(input) {
         reader.readAsDataURL(file);
     } else {
         preview.innerHTML = `
-            <i class="fas fa-image text-4xl mb-2 block"></i>
-            <p class="text-sm">Belum ada gambar</p>
+            <img src="{{ asset('images/fallbacks/no-image.svg') }}" alt="Tidak ada gambar"
+                 class="w-full h-48 object-cover rounded-lg shadow-sm">
+            <p class="mt-2 text-sm">Belum ada gambar</p>
         `;
     }
 };

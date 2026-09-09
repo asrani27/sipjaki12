@@ -42,7 +42,7 @@
                 <div class="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow">
                     <!-- Image Preview -->
                     <div class="aspect-video bg-gray-100 relative">
-                        <img src="{{ Storage::disk('s3')->url($slide->file) }}" 
+                        <img src="{{ Storage::disk('public')->url($slide->file) }}" 
                              alt="Slide {{ $slide->id }}" 
                              class="w-full h-full object-cover">
                         

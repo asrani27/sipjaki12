@@ -160,8 +160,8 @@ class PeraturanController extends Controller
                 }
                 
                 try {
-                    // Upload to S3 - putFileAs returns the full path
-                    $s3Path = Storage::disk('s3')->putFileAs(
+                    // Upload to public disk - putFileAs returns the full path
+                    $s3Path = Storage::disk('public')->putFileAs(
                         'sipjaki',
                         $tempPath,
                         $filename,
@@ -270,7 +270,7 @@ class PeraturanController extends Controller
             // Fallback to traditional upload
             $file = $request->file('file');
             $fileName = 'peraturan-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $path = Storage::disk('s3')->putFileAs('sipjaki', $file, $fileName);
+            $path = Storage::disk('public')->putFileAs('sipjaki', $file, $fileName);
             $data['file'] = basename($path);
         }
 
@@ -305,15 +305,15 @@ class PeraturanController extends Controller
         $data = $request->except('file');
 
         if ($request->hasFile('file')) {
-            // Hapus file lama dari S3
+            // Hapus file lama dari storage
             if ($peraturan->file) {
-                Storage::disk('s3')->delete('sipjaki/' . $peraturan->file);
+                Storage::disk('public')->delete('sipjaki/' . $peraturan->file);
             }
 
-            // Upload file baru ke S3
+            // Upload file baru ke storage
             $file = $request->file('file');
             $fileName = 'peraturan-' . uniqid() . '.' . $file->getClientOriginalExtension();
-            $path = Storage::disk('s3')->putFileAs('sipjaki', $file, $fileName);
+            $path = Storage::disk('public')->putFileAs('sipjaki', $file, $fileName);
             $data['file'] = basename($path);
         }
 
@@ -328,9 +328,9 @@ class PeraturanController extends Controller
      */
     public function destroy(Peraturan $peraturan)
     {
-        // Hapus file dari S3 jika ada
+        // Hapus file dari storage jika ada
         if ($peraturan->file) {
-            Storage::disk('s3')->delete('sipjaki/' . $peraturan->file);
+            Storage::disk('public')->delete('sipjaki/' . $peraturan->file);
         }
 
         $peraturan->delete();
