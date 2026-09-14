@@ -3,6 +3,8 @@
 use App\Http\Controllers\AgendaController;
 use App\Http\Controllers\PeraturanController;
 use App\Http\Controllers\PelatihanController;
+use App\Http\Controllers\SertifikasiController;
+use App\Http\Controllers\BimtekController;
 use App\Http\Controllers\PotensiController;
 use App\Http\Controllers\SlideController;
 use Illuminate\Support\Facades\Route;
@@ -103,6 +105,12 @@ Route::middleware(['auth', '2fa'])->group(function () {
 
         // Pelatihan Routes
         Route::resource('pelatihan', PelatihanController::class);
+
+        // Sertifikasi Routes
+        Route::resource('sertifikasi', SertifikasiController::class);
+
+        // Bimtek Routes
+        Route::resource('bimtek', BimtekController::class);
 
         // Potensi Pasar Routes
         Route::resource('potensi', PotensiController::class);

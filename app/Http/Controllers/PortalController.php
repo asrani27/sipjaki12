@@ -94,7 +94,8 @@ class PortalController extends Controller
      */
     public function sertifikasi()
     {
-        return view('portal.sertifikasi');
+        $sertifikasi = \App\Models\Sertifikasi::latest()->paginate(10);
+        return view('portal.sertifikasi', compact('sertifikasi'));
     }
 
     /**
@@ -102,7 +103,8 @@ class PortalController extends Controller
      */
     public function bimtek()
     {
-        return view('portal.bimtek');
+        $bimtek = \App\Models\Bimtek::latest()->paginate(10);
+        return view('portal.bimtek', compact('bimtek'));
     }
 
     /**
