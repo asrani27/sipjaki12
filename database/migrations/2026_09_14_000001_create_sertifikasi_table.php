@@ -25,6 +25,9 @@ return new class extends Migration
                 $table->string('penanggung_jawab');
                 $table->string('jenjang');
                 $table->string('sub_klasifikasi');
+                $table->string('jenjang_klasifikasi')->nullable();
+                $table->string('jenjang_kualifikasi')->nullable();
+                $table->string('nomor_sertifikat')->nullable();
                 $table->date('selesai');
                 $table->string('jam');
                 $table->text('keterangan')->nullable();

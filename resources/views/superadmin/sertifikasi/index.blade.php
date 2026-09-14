@@ -62,7 +62,10 @@
                             {{ $item->tahun }}
                         </td>
                         <td class="px-6 py-4 text-sm font-medium text-gray-900">
-                            {{ $item->nama }}
+                            <div>{{ $item->nama }}</div>
+                            @if($item->nomor_sertifikat)
+                            <div class="text-xs text-gray-500 font-normal">No. Sertifikat: {{ $item->nomor_sertifikat }}</div>
+                            @endif
                         </td>
                         <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                             {{ \Carbon\Carbon::parse($item->waktu)->format('d/m/Y') }}

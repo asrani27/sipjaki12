@@ -39,7 +39,10 @@
                         {{ $sertifikasi->firstItem() + $loop->index }}
                     </td>
                     <td class="px-6 py-4 text-sm text-gray-900 font-medium">
-                        {{ $item->nama }}
+                        <div>{{ $item->nama }}</div>
+                        @if($item->nomor_sertifikat)
+                        <div class="text-xs text-gray-500 font-normal">No. Sertifikat: {{ $item->nomor_sertifikat }}</div>
+                        @endif
                     </td>
                     <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-900">
                         {{ $item->tahun }}
@@ -109,9 +112,12 @@
         @foreach($sertifikasi as $item)
         {{ $item->id }}: {
             nama: "{{ $item->nama }}",
+            nomor_sertifikat: "{{ $item->nomor_sertifikat ?? '-' }}",
             tahun: "{{ $item->tahun }}",
             kualifikasi: "{{ $item->kualifikasi }}",
             klasifikasi: "{{ $item->klasifikasi }}",
+            jenjang_klasifikasi: "{{ $item->jenjang_klasifikasi ?? '-' }}",
+            jenjang_kualifikasi: "{{ $item->jenjang_kualifikasi ?? '-' }}",
             jenjang: "{{ $item->jenjang }}",
             tanggal_mulai: "{{ \Carbon\Carbon::parse($item->waktu)->format('d/m/Y') }}",
             tanggal_selesai: "{{ \Carbon\Carbon::parse($item->selesai)->format('d/m/Y') }}",
@@ -137,6 +143,10 @@
                         <p class="text-gray-900 font-medium">${data.nama}</p>
                     </div>
                     <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Nomor Sertifikat</label>
+                        <p class="text-gray-900">${data.nomor_sertifikat}</p>
+                    </div>
+                    <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Tahun</label>
                         <p class="text-gray-900">${data.tahun}</p>
                     </div>
@@ -145,19 +155,27 @@
                         <p class="text-gray-900">${data.kualifikasi}</p>
                     </div>
                     <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Jenjang Kualifikasi</label>
+                        <p class="text-gray-900">${data.jenjang_kualifikasi}</p>
+                    </div>
+                    <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Klasifikasi</label>
                         <p class="text-gray-900">${data.klasifikasi}</p>
+                    </div>
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-700 mb-1">Jenjang Klasifikasi</label>
+                        <p class="text-gray-900">${data.jenjang_klasifikasi}</p>
                     </div>
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Jenjang</label>
                         <p class="text-gray-900">${data.jenjang}</p>
                     </div>
+                </div>
+                <div class="space-y-3">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Tanggal Mulai</label>
                         <p class="text-gray-900">${data.tanggal_mulai}</p>
                     </div>
-                </div>
-                <div class="space-y-3">
                     <div>
                         <label class="block text-sm font-semibold text-gray-700 mb-1">Tanggal Selesai</label>
                         <p class="text-gray-900">${data.tanggal_selesai}</p>

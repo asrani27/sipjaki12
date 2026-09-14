@@ -205,17 +205,58 @@
                     </div>
                 </div>
 
-                <!-- Sub Klasifikasi -->
-                <div class="mb-6">
-                    <label for="sub_klasifikasi" class="block text-sm font-medium text-gray-700 mb-2">
-                        Sub Klasifikasi <span class="text-red-500">*</span>
-                    </label>
-                    <input type="text" name="sub_klasifikasi" id="sub_klasifikasi"
-                        class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
-                        value="{{ old('sub_klasifikasi', $sertifikasi->sub_klasifikasi) }}" placeholder="Masukkan sub klasifikasi" required>
-                    @error('sub_klasifikasi')
-                    <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
-                    @enderror
+                <!-- Sub Klasifikasi & Nomor Sertifikat -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="sub_klasifikasi" class="block text-sm font-medium text-gray-700 mb-2">
+                            Sub Klasifikasi <span class="text-red-500">*</span>
+                        </label>
+                        <input type="text" name="sub_klasifikasi" id="sub_klasifikasi"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            value="{{ old('sub_klasifikasi', $sertifikasi->sub_klasifikasi) }}" placeholder="Masukkan sub klasifikasi" required>
+                        @error('sub_klasifikasi')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="nomor_sertifikat" class="block text-sm font-medium text-gray-700 mb-2">
+                            Nomor Sertifikat
+                        </label>
+                        <input type="text" name="nomor_sertifikat" id="nomor_sertifikat"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            value="{{ old('nomor_sertifikat', $sertifikasi->nomor_sertifikat) }}" placeholder="Masukkan nomor sertifikat">
+                        @error('nomor_sertifikat')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+                </div>
+
+                <!-- Jenjang Klasifikasi & Jenjang Kualifikasi -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+                    <div>
+                        <label for="jenjang_klasifikasi" class="block text-sm font-medium text-gray-700 mb-2">
+                            Jenjang Klasifikasi
+                        </label>
+                        <input type="text" name="jenjang_klasifikasi" id="jenjang_klasifikasi"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            value="{{ old('jenjang_klasifikasi', $sertifikasi->jenjang_klasifikasi) }}" placeholder="Masukkan jenjang klasifikasi">
+                        @error('jenjang_klasifikasi')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
+
+                    <div>
+                        <label for="jenjang_kualifikasi" class="block text-sm font-medium text-gray-700 mb-2">
+                            Jenjang Kualifikasi
+                        </label>
+                        <input type="text" name="jenjang_kualifikasi" id="jenjang_kualifikasi"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500"
+                            value="{{ old('jenjang_kualifikasi', $sertifikasi->jenjang_kualifikasi) }}" placeholder="Masukkan jenjang kualifikasi">
+                        @error('jenjang_kualifikasi')
+                        <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
+                        @enderror
+                    </div>
                 </div>
 
                 <!-- Keterangan -->
