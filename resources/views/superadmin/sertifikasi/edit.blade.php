@@ -95,6 +95,7 @@
                         <p class="mt-2 text-sm text-red-600">{{ $message }}</p>
                         @enderror
                     </div>
+                </div>
 
                 <!-- Form Row 3 -->
                 <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
@@ -241,7 +242,7 @@
                         <button type="submit"
                             class="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors flex items-center space-x-2">
                             <i class="fas fa-save"></i>
-                            <span>Update</span>
+                            <span>Simpan</span>
                         </button>
                     </div>
                 </div>
@@ -250,4 +251,3 @@
     </div>
 </div>
 @endsection
-                </div>
